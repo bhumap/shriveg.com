@@ -4,6 +4,9 @@ import Ripple from "material-ripple-effects";
 import Image from "next/image";
 
 export default function PopularChefs({chefs}) {
+
+  
+
   var arr = [1, 2, 3, 4];
   const ripple = new Ripple();
 

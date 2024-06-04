@@ -1,17 +1,16 @@
+"use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CollectionCard from "@/components/common/CollectionCard";
 
-export const metadata = {
-  title: "Home - Shri Veg",
-  desc: "Online Food Delivery Service Providers",
-};
-
-var fetchPopularFoods = async () => {
+var fetchPopularFoods = async (lat, log) => {
   try {
-    var res = await fetch(`https://www.shriveg.com/api/dishes/?lat=${28.5709396}&lon=${77.2896636}`, {
-      cache: "no-store",
-    });
+    var res = await fetch(
+      `http://localhost:3000/api/dishes/?lat=${lat}&lon=${log}`,
+      {
+        cache: "no-store",
+      }
+    );
     res = await res.json();
     return res.message;
   } catch (error) {
@@ -20,7 +19,28 @@ var fetchPopularFoods = async () => {
 };
 
 const page = async () => {
-  var foods = await fetchPopularFoods();
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setLatitude(latitude);
+          setLongitude(longitude);
+          console.log("Latitude and Longitude set:", { latitude, longitude });
+        },
+        (error) => {
+          console.error("Geolocation error:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }, []);
+
+  var foods = await fetchPopularFoods(latitude, longitude);
 
   const fastFoods = foods.data.filter((food) => food.category === "breakfast");
 

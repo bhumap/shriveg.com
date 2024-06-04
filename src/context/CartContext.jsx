@@ -10,6 +10,8 @@ const CartProvider = ({ children }) => {
   var pathname = usePathname()
 
   const [cartItems, setCartItems] = useState([]);
+  const [lat, setLat] = useState(102.55); // Changed initial state of data to null
+  const [log, setLog] = useState(); // Changed initial state of data to null
 
   const addToCart = (newItem) => {
     var cartCopy = [...cartItems];
@@ -108,7 +110,6 @@ const CartProvider = ({ children }) => {
     setShowSideCart(false)
   },[pathname])
 
-
   return (
     <CartContext.Provider
       value={{
@@ -119,7 +120,11 @@ const CartProvider = ({ children }) => {
         removeFromCart,
         showSideCart,
         setShowSideCart,
-        calculateTotal
+        calculateTotal,
+        lat,
+        setLat,
+        log,
+        setLog
       }}
     >
       <CartSideBar />
