@@ -4,6 +4,24 @@ import { JWTVerify } from "@/helpers/jwt";
 import UsersModel from "@/models/users";
 const { ObjectId } = require("mongoose").Types;
 
+// Function to calculate distance between two coordinates using Haversine formula
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Radius of the earth in km
+  const dLat = deg2rad(lat2 - lat1);
+  const dLon = deg2rad(lon2 - lon1);
+  const a = 
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI / 180);
+}
+
 export default async function handler(req, res) {
   await dbConnect();
 
@@ -14,10 +32,6 @@ export default async function handler(req, res) {
     case "GET":
       try {
         var match = {};
-
-        const page = req.query.page || 1;
-        const limit = req.query.limit || 30;
-        const skip = (page - 1) * limit;
 
         if (req.query.s) {
           match.title = new RegExp(req.query.s, "i");
@@ -60,12 +74,10 @@ export default async function handler(req, res) {
                 },
                 {
                   $and: [
-
                     { "chef.vacationfromDate": { $lte: currentDate } },
-
-                    { "chef.vacationtoDate": { $gte: currentDate } }
-                  ]
-                }
+                    { "chef.vacationtoDate": { $gte: currentDate } },
+                  ],
+                },
               ],
             },
           },
@@ -78,32 +90,33 @@ export default async function handler(req, res) {
               "chef.userType": false,
             },
           },
-          { $limit: limit },
-          { $skip: skip },
           { $sort: { createdAt: -1 } },
         ]);
 
-        // const properties = await DishesModel.find({...match,status:"Published"})
-        //   .limit(limit)
-        //   .skip(skip)
-        //   .sort({ createdAt: -1 });
-        const total = await DishesModel.find({
+        const lat = parseFloat(req.query.lat);
+        const lon = parseFloat(req.query.lon);
+
+        const filteredProperties = properties.filter(dish => {
+          const distance = calculateDistance(
+            lat,
+            lon,
+            dish.latitude,
+            dish.longitude
+          );
+          return distance <= 10;
+        });
+
+        const total = await DishesModel.countDocuments({
           ...match,
           status: "Published",
-        }).count();
-
-        var starting = total ? skip + 1 : 0;
-        var ending =
-          starting + limit - 1 > total ? total : starting + limit - 1;
+        });
 
         res.status(200).json({
           success: true,
           message: {
-            data: properties,
+            data: filteredProperties,
             chef: Chef,
             count: total,
-            starting,
-            ending,
           },
         });
       } catch (error) {
@@ -134,8 +147,7 @@ export default async function handler(req, res) {
           data: item,
         });
       } catch (err) {
-
-        console.log(err)
+        console.log(err);
 
         // For duplicate Error
         if (err.code === 11000) {

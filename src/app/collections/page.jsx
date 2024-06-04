@@ -1,60 +1,38 @@
-"use client"; 
 
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import React from "react";
 import CollectionCard from "@/components/common/CollectionCard";
 
-const Page = () => {
-  const [foods, setFoods] = useState([]);
+export const metadata = {
+  title: "Home - Shri Veg",
+  desc: "Online Food Delivery Service Providers",
+};
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          console.log("Latitude and Longitude set:", { latitude, longitude });
+var fetchPopularFoods = async () => {
+  try {
+    var res = await fetch(`${process.env.DOMAIN}/api/dishes`, {
+      cache: "no-store",
+    });
+    res = await res.json();
+    return res.message;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-          fetchNearbyFoods(latitude, longitude);
-        },
-        (error) => {
-          console.error("Geolocation error:", error);
-          toast.error(
-            "Unable to retrieve location. Please allow location access."
-          );
-        }
-      );
-    }
-  }, []);
+const page = async () => {
+  var foods = await fetchPopularFoods();
 
-  const fetchNearbyFoods = async (latitude, longitude) => {
-    try {
-      const response = await fetch(
-        `${process.env.DOMAIN}/api/dishes/nearbyFoods?lat=${latitude}&lon=${longitude}`
-      );
-      if (response.ok) {
-        const data = await response.json();
-        setFoods(data);
-      } else {
-        console.error("Failed to fetch nearby foods");
-      }
-    } catch (error) {
-      console.error("Error fetching nearby foods:", error);
-    }
-  };
-
-  const fastFoods = foods && foods.length > 0 ? foods.filter((food) => food.category === "breakfast") : [];
+  const fastFoods = foods.data.filter((food) => food.category === "breakfast");
 
   return (
     <div>
-      {fastFoods.length > 0 && (
-        <CollectionCard
-          dishes={fastFoods}
-          title={"Great Morning"}
-          dis={"Offering you a delightful start to your morning"}
-        />
-      )}
+      <CollectionCard
+        dishes={fastFoods}
+        title={"Great Morning"}
+        dis={"Offering you a delightful start to your morning"}
+      />
     </div>
   );
 };
 
-export default Page;
+export default page;
