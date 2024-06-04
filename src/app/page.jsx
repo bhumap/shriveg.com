@@ -27,7 +27,7 @@ var fetchChefs = async () => {
 
 var fetchPopularFoods = async () => {
   try {
-    var res = await fetch(`http://localhost:3000/api/dishes/?lat=${28.5709396}&lon=${77.2896636}`, {
+    var res = await fetch(`https://www.shriveg.com/api/dishes/?lat=${28.5709396}&lon=${77.2896636}`, {
       cache: "no-store",
     });
     res = await res.json();

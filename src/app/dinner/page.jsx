@@ -8,7 +8,7 @@ export const metadata = {
 
 var fetchPopularFoods = async () => {
   try {
-    var res = await fetch(`${process.env.DOMAIN}/api/dishes`, {
+    var res = await fetch(`https://www.shriveg.com/api/dishes/?lat=${28.5709396}&lon=${77.2896636}`, {
       cache: "no-store",
     });
     res = await res.json();
