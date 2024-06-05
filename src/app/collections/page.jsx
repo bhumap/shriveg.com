@@ -1,4 +1,3 @@
-
 import React from "react";
 import CollectionCard from "@/components/common/CollectionCard";
 
@@ -21,7 +20,6 @@ var fetchPopularFoods = async () => {
 
 const page = async () => {
   var foods = await fetchPopularFoods();
-
   const fastFoods = foods.data.filter((food) => food.category === "breakfast");
 
   return (

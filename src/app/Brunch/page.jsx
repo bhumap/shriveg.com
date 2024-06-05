@@ -6,12 +6,14 @@ export const metadata = {
   desc: "Online Food Delivery Service Providers",
 };
 
-
 var fetchPopularFoods = async () => {
   try {
-    var res = await fetch(`http://localhost:3000/api/dishes/?lat=${28.5709396}&lon=${77.2896636}`, {
-      cache: "no-store",
-    });
+    var res = await fetch(
+      `https://www.shriveg.com/api/dishes/?lat=${28.5709396}&lon=${77.2896636}`,
+      {
+        cache: "no-store",
+      }
+    );
     res = await res.json();
     return res.message;
   } catch (error) {
@@ -25,7 +27,11 @@ const page = async () => {
 
   return (
     <div>
-      <CollectionCard dishes={fastFoods} title={"Irresistible Brunch"} dis={"Treat yourself to a delightful mid-day feast!"}/>
+      <CollectionCard
+        dishes={fastFoods}
+        title={"Irresistible Brunch"}
+        dis={"Treat yourself to a delightful mid-day feast!"}
+      />
     </div>
   );
 };
