@@ -20,7 +20,7 @@ const fetchPopularFoods = async (lat, lon) => {
   }
 };
 
-const page = () => {
+const Page = () => {
   const [foods, setFoods] = useState([]);
   const [location, setLocation] = useState({ latitude: null, longitude: null });
 
@@ -52,7 +52,9 @@ const page = () => {
     }
   }, []);
 
-  const fastFoods = foods?.data?.filter((food) => food.category === "breakfast");
+  const fastFoods = foods?.data?.filter(
+    (food) => food.category === "breakfast"
+  );
 
   return (
     <div>
@@ -65,4 +67,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
