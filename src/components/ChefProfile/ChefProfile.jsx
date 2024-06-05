@@ -10,6 +10,9 @@ import { useQuery } from "react-query";
 import Image from "next/image";
 
 const ChefProfile = ({ chefDetail }) => {
+
+  console.log(chefDetail);
+
   var { user } = useContext(AuthContext);
 
   return (

@@ -8,9 +8,8 @@
   font-weight: 700;
   font-size: 25px;
   margin-bottom: 20px;
-  
 }
-.brunch{
+.brunch {
   height: 180px !important;
   width: 180px !important;
 }
@@ -24,41 +23,62 @@
 }
 .heroSection {
   height: 65vh;
-  background-image: url(https://www.pixelstalk.net/wp-content/uploads/2016/08/Food-Wallpapers-HD-For-Desktop.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(https://images.pexels.com/photos/1199960/pexels-photo-1199960.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.category-inner ul li a img{
-    height: 150px;
-    width: 150px;
+.category-inner ul li a img {
+  height: 150px;
+  width: 150px;
+}
+.border {
+  border: 1px solid rgb(224, 223, 223);
+  border-radius: 10px;
 }
 
-.category-inner ul li{
-   font-size: 17px;
-   font-weight: 600;
-   color: #636060;
+.myapp{
+  display: flex;
+  gap: 20px;
 }
 
-.category-inner ul li a{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-.denar{
-    height: 180px !important;
-    width: 180px !important;
-    margin-bottom: -20px;
-    margin-top: -12px;
+.myapp a img{
+  height: 100%;
+  width: 100%;
 }
 
-.collction-box{
+.myapp a{
+  height: 55px;
+  display: block;
+  width: 150px;
+}
+
+.category-inner ul li {
+  font-size: 17px;
+  font-weight: 600;
+  color: #636060;
+}
+
+.category-inner ul li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.denar {
+  height: 180px !important;
+  width: 180px !important;
+  margin-bottom: -20px;
+  margin-top: -12px;
+}
+
+.collction-box {
   width: 75%;
   margin: auto;
   padding-top: 20px;
 }
-.collction-main-box{
+.collction-main-box {
   width: 100%;
   padding-top: 20px;
   display: flex;
@@ -66,7 +86,7 @@
   flex-wrap: wrap;
   margin-bottom: 30px;
 }
-.collction-card{
+.collction-card {
   width: 25%;
   padding-bottom: 10px !important;
   flex-basis: 275px;
@@ -74,7 +94,7 @@
   overflow: hidden;
   border: 1px solid #dcdbdb;
 }
-.collction-card img{
+.collction-card img {
   width: 100% !important;
   margin-top: 0px !important;
   height: 180px;
@@ -82,7 +102,7 @@
   border-radius: 10px;
   cursor: pointer;
 }
-.card-price{
+.card-price {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -90,7 +110,7 @@
   margin-top: 10px;
 }
 
-.collction-box h2{
+.collction-box h2 {
   font-size: 30px;
   font-weight: bold;
 }
@@ -103,29 +123,34 @@
     padding: 17px;
     padding-left: 10rem;
     padding-right: 10rem;
-}
+  }
 }
 
 @media (max-width: 640px) {
-  .collction-card{
+  .collction-card {
     flex-basis: 100%;
   }
   .collction-box {
     width: 94%;
   }
-  .category-box{
+  .category-box {
     width: 96%;
   }
-  .category-inner ul li a img{
+  .category-inner ul li a img {
     height: 86px;
   }
-  .denar{
+  .denar {
     height: 98px !important;
     width: 180px !important;
     margin-bottom: -13px;
-     margin-top: 0px; 
+    margin-top: 0px;
   }
-  .category-inner ul li a{
+  .category-inner ul li a {
     font-size: 12px;
+  }
+  .myapp a{
+    height: 35px;
+    display: block;
+    width: 100px;
   }
 }

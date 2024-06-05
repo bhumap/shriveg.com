@@ -9,6 +9,7 @@ import NewsLetter from "@/components/common/NewsLetter";
 import Hero from "@/components/home/Hero";
 import Category from "@/components/home/Category";
 
+
 const fetchChefs = async () => {
   try {
     const res = await fetch(`https://www.shriveg.com/api/users?userType=Chef`, {
@@ -76,6 +77,7 @@ const HomePage = () => {
       getPopularFoods();
     }
   }, []);
+  
 
   return (
     <div>
