@@ -80,7 +80,6 @@ const HomePage = () => {
   return (
     <div>
       <Hero />
-      {/* <WorkFlow /> */}
       <Category />
       <PopularChefs chefs={chefs} />
       <PopularFoods dishes={foods} />

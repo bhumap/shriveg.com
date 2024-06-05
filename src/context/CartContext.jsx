@@ -11,7 +11,7 @@ const CartProvider = ({ children }) => {
 
   const [cartItems, setCartItems] = useState([]);
   const [lat, setLat] = useState(102.55); // Changed initial state of data to null
-  const [log, setLog] = useState(); // Changed initial state of data to null
+  const [log, setLog] = useState(null); // Changed initial state of data to null
 
   const addToCart = (newItem) => {
     var cartCopy = [...cartItems];

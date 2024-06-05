@@ -37,7 +37,7 @@ const CollectionCard = ({ dishes, title, dis }) => {
       <p>{dis}</p>
 
       <div className="collction-main-box">
-      {dishes.map((v, i) => {
+      {dishes?.map((v, i) => {
           console.log(v);
           return (
             <div key={i} className="collction-card">
