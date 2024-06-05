@@ -1,26 +1,58 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
+
 import CollectionCard from "@/components/common/CollectionCard";
 
-export const metadata = {
-  title: "Home - Shri Veg",
-  desc: "Online Food Delivery Service Providers",
-};
-
-var fetchPopularFoods = async () => {
+const fetchPopularFoods = async (lat, lon) => {
   try {
-    var res = await fetch(`https://www.shriveg.com/api/dishes/?lat=${28.5709396}&lon=${77.2896636}`, {
-      cache: "no-store",
-    });
-    res = await res.json();
-    return res.message;
+    const res = await fetch(
+      `https://www.shriveg.com/api/dishes?lat=${lat}&lon=${lon}`,
+      {
+        cache: "no-store",
+      }
+    );
+    const data = await res.json();
+    return data.message;
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    return [];
   }
 };
 
-const page = async () => {
-  var foods = await fetchPopularFoods();
-  const fastFoods = foods.data.filter((food) => food.category === "dinner");
+const Page = () => {
+  const [foods, setFoods] = useState([]);
+  const [location, setLocation] = useState({ latitude: null, longitude: null });
+
+  useEffect(() => {
+    const getPopularFoods = async (lat, lon) => {
+      const foodsData = await fetchPopularFoods(lat, lon);
+      setFoods(foodsData);
+    };
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setLocation({ latitude, longitude });
+          getPopularFoods(latitude, longitude);
+
+          console.log("Latitude and Longitude set:", { latitude, longitude });
+        },
+        (error) => {
+          console.error("Geolocation error:", error);
+          toast.error(
+            "Unable to retrieve location. Please allow location access."
+          );
+          getPopularFoods();
+        }
+      );
+    } else {
+      getPopularFoods();
+    }
+  }, []);
+
+  const fastFoods = foods?.data?.filter((food) => food.category === "dinner");
 
   return (
     <div>
@@ -33,4 +65,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default Page;
