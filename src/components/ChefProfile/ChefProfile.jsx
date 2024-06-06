@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import FoodCard from "@/components/common/FoodCard";
 import { Rating } from "primereact/rating";
 import Slider from "react-slick";
@@ -8,9 +8,62 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 
 const ChefProfile = ({ chefDetail }) => {
+  const params = useParams();
 
+  const trimmedUsername = params.username.slice(3);
+  console.log(trimmedUsername);
+
+  const fetchPopularFoods = async (lat, lon) => {
+    try {
+      const res = await fetch(
+        `http://localhost:3000/api/dishes?chef=${trimmedUsername}&lat=${lat}&lon=${lon}`,
+        {
+          cache: "no-store",
+        }
+      );
+      const data = await res.json();
+      return data.message;
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  };
+
+  const [foods, setFoods] = useState([]);
+  const [location, setLocation] = useState({ latitude: null, longitude: null });
+
+  useEffect(() => {
+    const getPopularFoods = async (lat, lon) => {
+      const foodsData = await fetchPopularFoods(lat, lon);
+      setFoods(foodsData);
+    };
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setLocation({ latitude, longitude });
+          getPopularFoods(latitude, longitude);
+
+          console.log("Latitude and Longitude set:", { latitude, longitude });
+        },
+        (error) => {
+          console.error("Geolocation error:", error);
+          toast.error(
+            "Unable to retrieve location. Please allow location access."
+          );
+          getPopularFoods();
+        }
+      );
+    } else {
+      getPopularFoods();
+    }
+  }, []);
+
+  console.log(foods);
   console.log(chefDetail);
 
   var { user } = useContext(AuthContext);
@@ -19,13 +72,17 @@ const ChefProfile = ({ chefDetail }) => {
     <div className="px-4 py-10">
       <div className="max-w-5xl mx-auto rounded-md">
         <div className="relative mb-12 shadow-lg">
-          <Image width={600} height={400}
+          <Image
+            width={600}
+            height={400}
             src={chefDetail?.message.chef?.coverPhoto || "/images/image.png"}
             className="w-full object-cover rounded-md h-[30vh]"
             alt=""
           />
           <div className="mx-auto w-20 h-20  rounded-full border-[6px] border-white absolute -translate-y-1/2 top-[100%] left-1/2 -translate-x-1/2">
-            <Image width={600} height={400}
+            <Image
+              width={600}
+              height={400}
               src={chefDetail?.message.chef?.photo || "/images/user.png"}
               className="w-full rounded-full h-full object-cover"
               alt=""
@@ -60,14 +117,16 @@ const ChefProfile = ({ chefDetail }) => {
               <p className="text-xs sm:text-sm text-gray-600">Ratings(0)</p>
             </div>
             <div>
-              <p className="font-semibold mb-1">₹ {parseInt(process.env.NEXT_PUBLIC_SHIPPING_COST)}</p>
+              <p className="font-semibold mb-1">
+                ₹ {parseInt(process.env.NEXT_PUBLIC_SHIPPING_COST)}
+              </p>
               <p className="text-xs sm:text-sm text-gray-600">Shipping Fee</p>
             </div>
           </div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 max-w-5xl gap-6 mb-10">
-          {chefDetail?.message?.data.map((v, i) => {
+          {foods?.data?.map((v, i) => {
             return <FoodCard key={i} food={v} />;
           })}
         </div>
@@ -87,18 +146,6 @@ const ChefProfile = ({ chefDetail }) => {
               } ${chefDetail?.message?.chef.address?.pinCode || ""}`}
             </span>
           </p>
-
-          {/* <div className="mb-4">
-            <p className="text-black font-medium text-sm sm:text-base mb-1">
-              Chef Message
-            </p>
-            <p className="text-xs sm:text-sm text-gray-600">
-              I love to cook for my friends and family, specializing in making
-              Pitha, achar, and local foods. I&apos;m passionate about producing and
-              promoting organic food, striving to bring wholesome and
-              sustainable ingredients to the table.
-            </p>
-          </div> */}
         </div>
 
         <Testimonial user={user} chefID={chefDetail?.message?.chef?._id} />
@@ -158,8 +205,6 @@ const Testimonial = ({ user, chefID }) => {
     ],
   };
 
- 
-
   var submitReview = async (e) => {
     e.preventDefault();
     try {
@@ -174,7 +219,7 @@ const Testimonial = ({ user, chefID }) => {
       if (data.success) {
         toast.success(data.message);
         setReviewData({});
-        refetch()
+        refetch();
       }
     } catch (error) {
       console.log(error);
@@ -193,19 +238,21 @@ const Testimonial = ({ user, chefID }) => {
               <div key={i} className="p-4">
                 <div>
                   <div className="gap-2 mb-2">
-                    <Image width={600} height={400}
+                    <Image
+                      width={600}
+                      height={400}
                       src={v?.customer?.photo || "/images/user.png"}
                       className="w-12 h-12 mx-auto mb-2 rounded-full shadow-lg"
                     />
                     <div>
                       <h5 className="font-semibold">{v?.customer?.fullName}</h5>
-                      <h6 className="text-sm text-primary">{v?.customer?.userType}</h6>
+                      <h6 className="text-sm text-primary">
+                        {v?.customer?.userType}
+                      </h6>
                     </div>
                   </div>
 
-                  <p className="text-sm">
-                  {v?.message}
-                  </p>
+                  <p className="text-sm">{v?.message}</p>
                   <Rating
                     value={v?.rating}
                     className="text-primary mx-auto block"
