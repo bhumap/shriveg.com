@@ -30,7 +30,7 @@ export default function MobileApp() {
           </div>
 
           <div className="flex gap-4 myapp">
-            <a href="./app-release.apk" download>
+            <a href="./shriveg.apk" download>
               <Image
                 width={600}
                 height={400}
