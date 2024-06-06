@@ -56,11 +56,17 @@ const Page = () => {
 
   return (
     <div>
-      <CollectionCard
-        dishes={fastFoods}
-        title={"Flavors of dinner"}
-        dis={"Savor the flavors of dinner and enjoy a delicious dinner."}
-      />
+      {foods?.data?.length > 0 ? (
+        <CollectionCard
+          dishes={fastFoods}
+          title={"Flavors of dinner"}
+          dis={"Savor the flavors of dinner and enjoy a delicious dinner."}
+        />
+      ) : (
+        <div className="col-span-full text-center mt-12">
+          Finding your nearest food...
+        </div>
+      )}
     </div>
   );
 };

@@ -126,9 +126,11 @@ const ChefProfile = ({ chefDetail }) => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 max-w-5xl gap-6 mb-10">
-          {foods?.data?.map((v, i) => {
-            return <FoodCard key={i} food={v} />;
-          })}
+          {foods?.data?.length > 0 ? (
+            foods.data.map((v, i) => <FoodCard key={i} food={v} />)
+          ) : (
+            <div className="col-span-full text-center mt-12">Will not be able to be delivered to your location</div>
+          )}
         </div>
 
         <div className="mb-10">
