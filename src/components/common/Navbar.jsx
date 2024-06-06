@@ -154,9 +154,12 @@ const Navbar = () => {
             <Link className="block md:inline-block p-2" href="/">
               Home
             </Link>
-            <Link className="block md:inline-block p-2" href="/about-us">
-              About
+            
+            <Link className="block md:inline-block p-2" href="/search">
+             Search
             </Link>
+           
+            
             <Link className="block md:inline-block p-2" href="/contact-us">
               Contact
             </Link>

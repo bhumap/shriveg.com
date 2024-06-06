@@ -38,17 +38,17 @@
   border-radius: 10px;
 }
 
-.myapp{
+.myapp {
   display: flex;
   gap: 20px;
 }
 
-.myapp a img{
+.myapp a img {
   height: 100%;
   width: 100%;
 }
 
-.myapp a{
+.myapp a {
   height: 55px;
   display: block;
   width: 150px;
@@ -109,11 +109,39 @@
   padding: 0px 10px;
   margin-top: 10px;
 }
+.locate-box {
+  width: 60%;
+  height: 80vh;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.set-location {
+  background-color: #065912;
+  padding: 11px 30px;
+  border-radius: 8px;
+}
+.locate-img {
+  height: 300px;
+  width: 300px;
+  background-image: url(https://www.pngall.com/wp-content/uploads/9/Vector-Location-PNG-Picture.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 15px;
+}
 
 .collction-box h2 {
   font-size: 30px;
   font-weight: bold;
 }
+.locate-box h4{
+  font-weight: bolder;
+  font-size: 17px;
+  color: rgb(44, 44, 44);
+ }
 
 @media (min-width: 640px) {
   .sm\:left-\[10\%\] {
@@ -148,9 +176,37 @@
   .category-inner ul li a {
     font-size: 12px;
   }
-  .myapp a{
+  .myapp a {
     height: 35px;
     display: block;
     width: 100px;
+  }
+  .locate-box {
+    width: 60%;
+    height: 80vh;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .locate-box p{
+    text-align: 11px;
+    text-align: center;
+  }
+  .locate-box h4{
+   font-weight: bolder;
+   font-size: 17px;
+   color: rgb(44, 44, 44);
+  }
+  .set-location {
+    background-color: #065912;
+    padding: 11px 30px;
+    border-radius: 8px;
+    font-size: 12px;
+  }
+  .locate-img {
+    height: 230px;
+    width: 230px;
   }
 }
