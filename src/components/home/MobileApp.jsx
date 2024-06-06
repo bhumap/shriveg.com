@@ -39,7 +39,7 @@ export default function MobileApp() {
                 alt="Download App"
               />
             </a>
-            <a className="rounded w-[25%]" href="./app-release.apk" download>
+            <a href="./shriveg.apk" download>
               <Image
                 width={600}
                 height={400}
