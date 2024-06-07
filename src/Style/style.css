@@ -111,12 +111,13 @@
 }
 .locate-box {
   width: 60%;
-  height: 40vh;
+  height: 47vh;
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-top: 70px;
 }
 .set-location {
   background-color: #065912;
@@ -241,7 +242,7 @@
   }
   .locate-box {
     width: 60%;
-    height: 40vh;
+    height: 47vh;
     margin: auto;
     display: flex;
     justify-content: center;
