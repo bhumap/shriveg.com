@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     value: {
-      // type: String,
+      type: String,
     },
     isVarified: {
       type: Boolean,
