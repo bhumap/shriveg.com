@@ -111,7 +111,7 @@
 }
 .locate-box {
   width: 60%;
-  height: 35vh;
+  height: 40vh;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -241,7 +241,7 @@
   }
   .locate-box {
     width: 60%;
-    height: 35vh;
+    height: 40vh;
     margin: auto;
     display: flex;
     justify-content: center;
