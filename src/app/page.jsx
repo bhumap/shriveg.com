@@ -9,7 +9,7 @@ import MobileApp from "@/components/home/MobileApp";
 import NewsLetter from "@/components/common/NewsLetter";
 import Hero from "@/components/home/Hero";
 import Category from "@/components/home/Category";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 const fetchChefs = async () => {
   try {
@@ -71,9 +71,11 @@ const HomePage = () => {
           console.error("Geolocation error:", error);
           if (error.code === error.PERMISSION_DENIED) {
             toast.error("Location access denied. Redirecting...");
-            router.push('/locate');
+            router.push("/locate");
           } else {
-            toast.error("Unable to retrieve location. Please allow location access.");
+            toast.error(
+              "Unable to retrieve location. Please allow location access."
+            );
             getPopularFoods();
           }
         }
@@ -88,11 +90,7 @@ const HomePage = () => {
       <Hero />
       <Category />
 
-      {chefs?.length > 0 ? (
-        <PopularChefs chefs={chefs} />
-      ) : (
-        <div className="col-span-full text-center mt-12">Loading...</div>
-      )}
+      <PopularChefs chefs={chefs} />
 
       <PopularFoods dishes={foods} />
       <MobileApp />

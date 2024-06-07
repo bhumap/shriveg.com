@@ -190,8 +190,9 @@
     align-items: center;
     flex-direction: column;
   }
-  .locate-box p{
-    text-align: 11px;
+
+  .access{
+    font-size: 12px;
     text-align: center;
   }
   .locate-box h4{
@@ -201,12 +202,12 @@
   }
   .set-location {
     background-color: #065912;
-    padding: 11px 30px;
+    padding: 12px 40px;
     border-radius: 8px;
-    font-size: 12px;
+    font-size: 13px;
   }
   .locate-img {
-    height: 230px;
-    width: 230px;
+    height: 200px;
+    width: 200px;
   }
 }
