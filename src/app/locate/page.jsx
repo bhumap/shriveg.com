@@ -55,6 +55,15 @@ const Locate = () => {
 
   return (
     <div>
+      <div className="locate-box">
+        <div className="locate-img"></div>
+        <h4>Location not found</h4>
+        <p className="access">
+          Granting permission for location access is essential for practical
+          use.
+        </p>
+      </div>
+
       <div className="search-hero">
         <div className="search-box">
           <input
@@ -76,24 +85,15 @@ const Locate = () => {
             </svg>
           </button>
         </div>
-        <div className="search-box search-box2"  onClick={handleButtonClick}>
+        <div className="search-box search-box2" onClick={handleButtonClick}>
           <div className="using-gps">
             <i className="bx bx-current-location"></i>
             <div className="my-loc">
-            <h4 >Use Current Location</h4> <br />
-            <p >Using Gps</p>
+              <h4>Use Current Location</h4> <br />
+              <p>Using Gps</p>
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="locate-box">
-        <div className="locate-img"></div>
-        <h4>Location not found</h4>
-        <p className="access">
-          Granting permission for location access is essential for practical
-          use.
-        </p>
       </div>
     </div>
   );
