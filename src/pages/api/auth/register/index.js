@@ -23,7 +23,6 @@ export default async function handler(req, res) {
       }
       bodyData.username = bodyData.username.toLowerCase()
 
-      // check for already existed username user
       var alreadyUsernameInUsedUser = await UsersModal.findOne({username:bodyData.username})
       if(alreadyUsernameInUsedUser){
         res.status(409).json({
