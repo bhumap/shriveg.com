@@ -40,7 +40,7 @@ const Locate = () => {
 
   const handleButtonClick = () => {
     if (permissionStatus === 'denied') {
-      alert('Location access has been denied. Please enable location access from your devic settings.');
+      alert('Location access has been denied. Please enable location access from your device settings.');
     } else if (permissionStatus !== 'granted') {
       requestPermission();
     } else {
