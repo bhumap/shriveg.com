@@ -16,21 +16,9 @@ const Locate = () => {
       } catch (error) {
         console.error('Error checking permission status:', error);
       }
-    };
+    }; 
     checkPermission();
   }, []); 
-
-  const requestPermissionAgain = () => {
-    navigator.permissions.query({ name: 'geolocation' })
-      .then(permissionStatus => {
-        if (permissionStatus.state === 'prompt') {
-          requestPermission();
-        }
-      })
-      .catch(error => {
-        console.error('Error requesting permission:', error);
-      });
-  };
 
   const requestPermission = () => {
     if (navigator.geolocation) {
@@ -58,7 +46,6 @@ const Locate = () => {
       console.log('Permission already granted.');
       router.push('/');
     }
-    requestPermissionAgain();
   };
 
   return (

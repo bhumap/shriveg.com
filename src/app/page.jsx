@@ -90,9 +90,18 @@ const HomePage = () => {
       <Hero />
       <Category />
 
-      <PopularChefs chefs={chefs} />
+      {chefs?.data?.length > 0 ? (
+        <PopularChefs chefs={chefs} />
+      ) : (
+        <div className="col-span-full text-center mt-12">Finding chefs...</div>
+      )}
 
-      <PopularFoods dishes={foods} />
+      {foods?.data?.length > 0 ? (
+       <PopularFoods dishes={foods} />
+      ) : (
+        <div className="col-span-full text-center mt-12">Finding your nearest food...</div>
+      )}
+
       <MobileApp />
       <NewsLetter />
     </div>
