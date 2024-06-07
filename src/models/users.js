@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     value: {
-      type: String,
+      // type: String,
     },
     isVarified: {
       type: Boolean,
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     value: {
       type: String,
       unique: true,
-      required:true,
+      // required:true,
     },
     isVarified: {
       type: Boolean,
