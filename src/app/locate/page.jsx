@@ -1,5 +1,4 @@
-"use client"
-
+"use client";
 import "@/Style/style.css";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -16,9 +15,9 @@ const Locate = () => {
       } catch (error) {
         console.error('Error checking permission status:', error);
       }
-    }; 
+    };
     checkPermission();
-  }, []); 
+  }, []);
 
   const requestPermission = () => {
     if (navigator.geolocation) {
@@ -39,8 +38,10 @@ const Locate = () => {
     }
   };
 
-  const handleButtonClick = async () => {
-    if (permissionStatus !== 'granted') {
+  const handleButtonClick = () => {
+    if (permissionStatus === 'denied') {
+      alert('Location access has been denied. Please enable location access from your browser settings.');
+    } else if (permissionStatus !== 'granted') {
       requestPermission();
     } else {
       console.log('Permission already granted.');
