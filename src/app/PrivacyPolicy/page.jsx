@@ -82,7 +82,7 @@ const page = () => {
             targeted to your interests. Most cookies are session cookies,
             which means that they are automatically deleted from your hard drive
             at the end of a session. You are always free to decline our cookies
-            if your browser permits. Additionally, you may encounter "cookies"
+            if your browser permits. Additionally, you may encounter cookies
             or other similar devices on certain pages of the Site that are
             placed by third parties. For example, if you view a web page created
             by a user, there may be a cookie placed within that web page. We do
