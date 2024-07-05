@@ -20,7 +20,7 @@ const Page = () => {
             best to create a space where you can explore and shop for all your
             favorite things in a safe and secure environment. All products and
             information displayed on  constitutes an
-            {/* "invitation to offer".  reserves the right to */}
+            "invitation to offer".  reserves the right to
             {/* accept or reject your offer. Your order for purchase, constitutes
             your "offer" which shall be subject to the terms and conditions as */}
             listed below.
