@@ -44,11 +44,11 @@ const Page = () => {
 
           <h4>2. Membership</h4>
           <p>
-            Although it's not essential to have an account to shop with
+            Although its not essential to have an account to shop with
             <Link href="https://www.shriveg.com/">shriveg.com</Link>, you can
             shop as a guest. As a member, you agree to provide true, accurate,
             current, and complete information about yourself as prompted by the
-            site's registration form. Registration where prohibited under any
+            sites registration form. Registration where prohibited under any
             law shall be void.
             <Link href="https://www.shriveg.com/">shriveg.com</Link> reserves
             the right to revoke or terminate your registration for any reason at
