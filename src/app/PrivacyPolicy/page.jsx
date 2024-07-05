@@ -70,7 +70,7 @@ const page = () => {
             In furtherance of the confidentiality with which we treat Personal
             Information, we have put in place appropriate physical, electronic,
             and managerial procedures to safeguard and secure the information we
-            collect online. We use data collection devices such as "cookies" on
+            collect online. We use data collection devices such as cookies on
             certain pages of the Site to help and analyze our web page flow,
             measure promotional effectiveness, and promote trust and safety.
             Cookies are small files placed on your hard drive that assist us in
@@ -79,7 +79,7 @@ const page = () => {
           <p>
             certain features that are only available through the use of a
             cookie. Cookies can also help us provide information that is
-            targeted to your interests. Most cookies are "session cookies,"
+            targeted to your interests. Most cookies are session cookies,
             which means that they are automatically deleted from your hard drive
             at the end of a session. You are always free to decline our cookies
             if your browser permits. Additionally, you may encounter "cookies"
@@ -141,7 +141,7 @@ const page = () => {
             they navigate our sites, and what content is popular. This allows us
             to improve your experience with us. Additionally, you can see how
             Google Analytics (one of our analytics tools) uses cookie
-            information when you use our partners' sites by visiting
+            information when you use our partners sites by visiting
             www.google.com/policies/privacy/partners, or any other URL Google
             may provide from time to time
           </p>
