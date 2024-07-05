@@ -16,12 +16,12 @@ const Page = () => {
             acceptance of these terms &amp; conditions. We reserve this right, in
             our sole discretion, to update or revise these terms &amp; conditions.
             Continued use of the site following the posting of any changes to
-            the &lsquo;terms &amp; conditions&rsquo;, constitutes your acceptance of those
-            changes. At &ldquo;---Website URL----&rdquo;, we try our best to create a space
+            the &quot;terms &amp; conditions&quot;, constitutes your acceptance of those
+            changes. At , we try our best to create a space
             where you can explore and shop for all your favorite things in a
             safe and secure environment. All products and information displayed
-            on &ldquo;---Website URL----&rdquo; constitutes an "invitation to offer".
-            &ldquo;---Website URL----&rdquo; reserves the right to accept or reject your
+            on  constitutes an "invitation to offer".
+            &quot;---Website URL----&quot; reserves the right to accept or reject your
             offer. Your order for purchase, constitutes your "offer" which shall
             be subject to the terms and conditions as listed below.
           </p>
