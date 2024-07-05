@@ -21,7 +21,7 @@ const Page = () => {
             By using <Link href="https://www.shriveg.com/">shriveg.com</Link>,
             you agree to these terms and conditions. We reserve the right to
             change these terms at any time, and such changes will be effective
-            immediately upon being posted on the site. It's a good idea to check
+            immediately upon being posted on the site. It&apos;s a good idea to check
             this page regularly to stay informed about any updates.
           </p>
 
@@ -41,7 +41,7 @@ const Page = () => {
             While you can browse{" "}
             <Link href="https://www.shriveg.com/">shriveg.com</Link> without
             creating an account, registering with us will make your shopping
-            experience more enjoyable. As a registered user, you're responsible
+            experience more enjoyable. As a registered user, you&apos;re responsible
             for keeping your account information secure and up-to-date. Please
             make sure to use a strong password and protect your account from
             unauthorized access.
@@ -61,7 +61,7 @@ const Page = () => {
           <h4>5. User Reviews and Comments</h4>
           <p>
             We love hearing from you! When you submit reviews, comments, or any
-            other content, you're giving us the right to use it. This means we
+            other content, you&apos;re giving us the right to use it. This means we
             can use, modify, and share your content in any way we see fit.
             Remember, your feedback helps us improve and grow.
           </p>
