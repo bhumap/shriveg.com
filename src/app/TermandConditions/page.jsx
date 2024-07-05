@@ -5,7 +5,8 @@ import Link from "next/link";
 const page = () => {
   return (
     <>
-      <div className="about-banner">
+    <h1>Hlo</h1>
+      {/* <div className="about-banner">
         <h1 className="about-shrveg">TERMS & CONDITIONS</h1>
         <div className="about-banner-img about-banner-img2">
           <p>
@@ -77,7 +78,7 @@ const page = () => {
             voluptatibus veritatis, aliquam nesciunt.
           </p>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

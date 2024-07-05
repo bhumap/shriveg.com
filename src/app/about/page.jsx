@@ -4,7 +4,8 @@ import "@/Style/style.css";
 const Page = () => {
   return (
     <>
-      <div className="about-banner">
+    <h1>Hlo</h1>
+      {/* <div className="about-banner">
         <h1 className="about-shrveg">ABOUT SHRIVEG</h1>
         <div className="about-banner-img">
           <div className="about-content1">
@@ -93,7 +94,7 @@ const Page = () => {
           </div>
         </div>
 
-      </div>
+      </div> */}
     </>
   );
 };
