@@ -1,0 +1,371 @@
+.category-box {
+  width: 70%;
+  margin: auto;
+  padding-top: 40px;
+}
+.what {
+  color: black;
+  font-weight: 700;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+.brunch {
+  height: 180px !important;
+  width: 180px !important;
+}
+.category-inner {
+  width: 100%;
+}
+.category-inner ul {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.heroSection {
+  height: 65vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(https://images.pexels.com/photos/1199960/pexels-photo-1199960.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.category-inner ul li a img {
+  height: 150px;
+  width: 150px;
+}
+.border {
+  border: 1px solid rgb(224, 223, 223);
+  border-radius: 10px;
+}
+
+.myapp {
+  display: flex;
+  gap: 20px;
+}
+
+.myapp a img {
+  height: 100%;
+  width: 100%;
+}
+
+.myapp a {
+  height: 55px;
+  display: block;
+  width: 150px;
+}
+
+.category-inner ul li {
+  font-size: 17px;
+  font-weight: 600;
+  color: #636060;
+}
+
+.category-inner ul li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.denar {
+  height: 180px !important;
+  width: 180px !important;
+  margin-bottom: -20px;
+  margin-top: -12px;
+}
+
+.collction-box {
+  width: 75%;
+  margin: auto;
+  padding-top: 20px;
+}
+.collction-main-box {
+  width: 100%;
+  padding-top: 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+.collction-card {
+  width: 25%;
+  padding-bottom: 10px !important;
+  flex-basis: 275px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #dcdbdb;
+}
+.collction-card img {
+  width: 100% !important;
+  margin-top: 0px !important;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.card-price {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0px 10px;
+  margin-top: 10px;
+}
+.locate-box {
+  width: 60%;
+  height: 47vh;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 70px;
+}
+.set-location {
+  background-color: #065912;
+  padding: 11px 30px;
+  border-radius: 8px;
+}
+.locate-img {
+  height: 200px;
+  width: 200px;
+  background-image: url(https://www.pngall.com/wp-content/uploads/9/Vector-Location-PNG-Picture.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 15px;
+}
+
+.collction-box h2 {
+  font-size: 30px;
+  font-weight: bold;
+}
+.locate-box h4 {
+  font-weight: bolder;
+  font-size: 17px;
+  color: rgb(44, 44, 44);
+}
+.search-hero {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  padding: 50px;
+}
+
+.search-box {
+  width: 60%;
+  height: 55px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid rgb(216, 216, 216);
+  position: relative;
+}
+.search {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 50px;
+  font-size: 10px;
+}
+.search svg {
+  color: red;
+}
+.using-gps {
+  display: flex;
+  align-items: center;
+}
+.search-box input {
+  height: 100%;
+  width: 100%;
+  border: none;
+}
+.search-box2 {
+  height: auto;
+  padding-bottom: 20px;
+  border-radius: 0px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.search-box2 h4 {
+  font-weight: bold;
+}
+.my-loc p {
+  margin-top: -25px;
+}
+.using-gps .bx-current-location {
+  width: 35px;
+  font-size: 25px;
+}
+
+.footer-pages {
+  width: 50%;
+  margin: auto;
+  margin-top: -10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.footer-pages ul h2{
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.footer-pages ul {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 5px;
+}
+.footer-pages ul li{
+  font-size: 14px;
+}
+.about-banner{
+  width: 100%;
+  background-image: url(../../public/images/banner2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 30px;
+}
+
+
+.about-shrveg{
+  text-align: center;
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.about-banner-img{
+  width: 70%;
+  height: 100%;
+  background-color: white;
+  margin: auto;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.about-banner-img2{
+  padding: 20px;
+}
+
+.about-banner-img2 {
+  font-size: 16px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.about-banner-img2 h4{
+  font-weight: 600;
+}
+
+.about-content1{
+  width: 30%;
+  padding: 30px;
+  text-align: center;
+  padding-bottom: 0px;
+}
+.about-content2{
+  padding: 30px;
+  width: 65%;
+  padding-bottom: 0px;
+}
+
+.about-content2 p{
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.who-we-are-box{
+  width: 95%;
+  margin: auto  ;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+.who-img-box{
+  width: 47%;
+  height: 500px;
+  background-color: aquamarine;
+}
+
+@media (min-width: 640px) {
+  .sm\:left-\[10\%\] {
+    left: auto;
+  }
+  .sm\:px-6 {
+    padding: 17px;
+    padding-left: 10rem;
+    padding-right: 10rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .collction-card {
+    flex-basis: 100%;
+  }
+  .collction-box {
+    width: 94%;
+  }
+  .category-box {
+    width: 96%;
+  }
+  .category-inner ul li a img {
+    height: 86px;
+  }
+  .denar {
+    height: 98px !important;
+    width: 180px !important;
+    margin-bottom: -13px;
+    margin-top: 0px;
+  }
+  .category-inner ul li a {
+    font-size: 12px;
+  }
+  .myapp a {
+    height: 35px;
+    display: block;
+    width: 100px;
+  }
+  .locate-box {
+    width: 60%;
+    height: 47vh;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .access {
+    font-size: 12px;
+    text-align: center;
+  }
+  .locate-box h4 {
+    font-weight: bolder;
+    font-size: 17px;
+    color: rgb(44, 44, 44);
+  }
+  .set-location {
+    background-color: #065912;
+    padding: 12px 40px;
+    border-radius: 8px;
+    font-size: 13px;
+  }
+  .locate-img {
+    height: 150px;
+    width: 150px;
+  }
+  .search-box {
+    width: 95%;
+  }
+  .search-hero {
+    padding: 0px;
+    padding-top: 20px;
+  }
+}

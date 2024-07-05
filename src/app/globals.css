@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    font-family:"Inter", sans-serif;
+}
+
+
+.heroSection{
+    background-image: linear-gradient(
+        rgba(0, 0, 0, .5), 
+        rgba(0, 0, 0, .5)
+      ), url(https://img.freepik.com/free-photo/farfalle-pasta-durum-wheat-with-baked-meatballs-chicken-fillet-tomato-sauce-salad-bowl_2829-11167.jpg?t=st=1711503612~exp=1711507212~hmac=c5150cb0a2f837f0ad50ec33f44cb6ef1647e6d32cfc22f4eefc1a40e0a128ec&w=2000);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+*::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #f5f5f5;
+    overflow: hidden;
+}
+
+*::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: #f5f5f5;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #bbb9;
+}
+
+.style-module_emptyIcons__Bg-FZ{
+    display: flex;
+
+}
