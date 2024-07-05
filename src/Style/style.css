@@ -209,7 +209,7 @@
   justify-content: space-between;
   margin-bottom: 30px;
 }
-.footer-pages ul h2{
+.footer-pages ul h2 {
   margin-bottom: 10px;
   font-weight: bold;
 }
@@ -220,10 +220,10 @@
   align-items: start;
   gap: 5px;
 }
-.footer-pages ul li{
+.footer-pages ul li {
   font-size: 14px;
 }
-.about-banner{
+.about-banner {
   width: 100%;
   background-image: url(../../public/images/banner2.jpg);
   background-size: cover;
@@ -232,19 +232,18 @@
   padding: 30px;
 }
 
-
-.about-shrveg{
+.about-shrveg {
   text-align: center;
   font-size: 25px;
   font-weight: 700;
   margin-bottom: 25px;
 }
 
-.about-banner-img2 p a{
+.about-banner-img2 p a {
   font-weight: 600;
 }
 
-.about-banner-img{
+.about-banner-img {
   width: 70%;
   height: 100%;
   background-color: white;
@@ -253,7 +252,7 @@
   gap: 20px;
   justify-content: center;
 }
-.about-banner-img2{
+.about-banner-img2 {
   padding: 20px;
 }
 
@@ -287,39 +286,98 @@
   gap: 10px;
 }
 
-.about-banner-img2 h4{
+.about-banner-img2 h4 {
   font-weight: 600;
 }
 
-.about-content1{
+.about-content1 {
   width: 30%;
   padding: 30px;
   text-align: center;
   padding-bottom: 0px;
 }
-.about-content2{
+.about-content2 {
   padding: 30px;
   width: 65%;
   padding-bottom: 0px;
 }
 
-.about-content2 p{
+.about-content2 p {
   margin-bottom: 20px;
   font-size: 14px;
 }
-.who-we-are-box{
+.who-we-are-box {
   width: 95%;
-  margin: auto  ;
+  margin: auto;
   margin-top: 30px;
   margin-bottom: 30px;
   display: flex;
   gap: 20px;
   justify-content: space-between;
 }
-.who-img-box{
+.who-img-box {
   width: 47%;
   height: 500px;
   background-color: aquamarine;
+}
+
+.contact-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+
+.contact-info p {
+  margin: 10px 0;
+}
+
+.contact-form {
+  padding-top: 20px;
+}
+
+.contact-form h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.form-group textarea {
+  height: 100px;
+}
+
+.contact-form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #065912;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+  border-radius: 8px;
+}
+
+button:hover {
+  background-color: #066e15;
 }
 
 @media (min-width: 640px) {
@@ -360,7 +418,7 @@
     display: block;
     width: 100px;
   }
-  .about-banner-img{
+  .about-banner-img {
     width: 100%;
     font-size: 14px;
     flex-direction: column;
@@ -373,35 +431,35 @@
     justify-content: space-between;
     margin-bottom: 30px;
     padding: 15px;
-}
-.about-content1{
-  width: 100%;
-}
-.about-content1 h1{
-  font-weight: bold;
-  margin-top: -20px;
-}
+  }
+  .about-content1 {
+    width: 100%;
+  }
+  .about-content1 h1 {
+    font-weight: bold;
+    margin-top: -20px;
+  }
 
-.about-content2{
-  width: 100%;
-  padding: 20px;
-  padding-bottom: 0px;
-}
-.about-content2 p {
-  margin-top: -20px;
-}
-.footer-pages ul li {
-  font-size: 13px;
-}
-.about-banner{
-  padding: 20px;
-}
-.about-shrveg {
-  text-align: center;
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
+  .about-content2 {
+    width: 100%;
+    padding: 20px;
+    padding-bottom: 0px;
+  }
+  .about-content2 p {
+    margin-top: -20px;
+  }
+  .footer-pages ul li {
+    font-size: 13px;
+  }
+  .about-banner {
+    padding: 20px;
+  }
+  .about-shrveg {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
   .locate-box {
     width: 60%;
     height: 47vh;
