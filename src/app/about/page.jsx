@@ -4,8 +4,7 @@ import "@/Style/style.css";
 const Page = () => {
   return (
     <>
-    <h1>Hlo</h1>
-      {/* <div className="about-banner">
+      <div className="about-banner">
         <h1 className="about-shrveg">ABOUT SHRIVEG</h1>
         <div className="about-banner-img">
           <div className="about-content1">
@@ -23,7 +22,7 @@ const Page = () => {
             <p>
               Our team is committed to quality, creativity, and convenience.
               Every meal we deliver is crafted with care, using the freshest
-              ingredients and innovative recipes. At Shriveg, we don't just
+              ingredients and innovative recipes. At Shriveg, we don&apos;t just
               deliver food—we deliver joy, health, and a commitment to a better
               future.
             </p>
@@ -87,14 +86,13 @@ const Page = () => {
               Shriveg is proud to serve communities across India. Our mission is
               to bring the benefits of vegetarian eating to people all over the
               country, making it easy and convenient to enjoy healthy,
-              delicious meals at home. Whether you're a lifelong vegetarian or
+              delicious meals at home. Whether you&apos;re a lifelong vegetarian or
               just exploring plant-based options, Shriveg is here to provide you
               with the best vegetarian food delivery experience.
             </p>
           </div>
         </div>
-
-      </div> */}
+      </div>
     </>
   );
 };
