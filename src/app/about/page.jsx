@@ -1,7 +1,7 @@
 import React from "react";
 import "@/Style/style.css";
 
-const page = () => {
+const Page = () => {
   return (
     <>
       <div className="about-banner">
@@ -98,4 +98,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
