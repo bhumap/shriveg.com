@@ -53,19 +53,6 @@ export default function Footer() {
             </li>
           </ul>
 
-          <ul>
-          <h2>Lern More</h2>
-            <li>
-              <Link href="#">Home</Link>
-            </li>
-            <li>
-              <Link href="#">About</Link>
-            </li>
-            <li>
-              <Link href="#">Term</Link>
-            </li>
-          </ul>
-
         </div>
 
         <hr className="border-t border-black/20" />

@@ -81,7 +81,7 @@ const Page = () => {
           <div className="about-content1">
             <h1>SHRIVEG INDIA</h1>
           </div>
-          <div className="about-content2">
+          <div className="about-content2 last-about">
             <p>
               Shriveg is proud to serve communities across India. Our mission is
               to bring the benefits of vegetarian eating to people all over the
