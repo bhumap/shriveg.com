@@ -11,16 +11,16 @@ const Page = () => {
           <p>
             Thank you for accessing/shopping at ---Website URL----.com. This
             site is owned by ---Company Name---- (hereinafter referred to as
-            "---Website URL----"). By accessing, shopping on this site, you
+            ). By accessing, shopping on this site, you
             indicate your unconditional acceptance of these terms & conditions.
             We reserve this right, in our sole discretion, to update or revise
             these terms & conditions. Continued use of the site following the
             posting of any changes to the 'terms & conditions', constitutes your
-            acceptance of those changes. At "---Website URL----", we try our
+            acceptance of those changes. , we try our
             best to create a space where you can explore and shop for all your
             favorite things in a safe and secure environment. All products and
-            information displayed on "---Website URL----" constitutes an
-            "invitation to offer". "---Website URL----" reserves the right to
+            information displayed on  constitutes an
+            "invitation to offer".  reserves the right to
             accept or reject your offer. Your order for purchase, constitutes
             your "offer" which shall be subject to the terms and conditions as
             listed below.
