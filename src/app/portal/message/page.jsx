@@ -1,11 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "@/context/AuthContext";
 
 const SendMessageForm = () => {
+  const { user } = useContext(AuthContext);
   const [senderId, setSenderId] = useState("");
   const [message, setMessage] = useState("");
   const [confirmedBy, setConfirmedBy] = useState("");
+
+  useEffect(() => {
+    if (user && user._id) {
+      setSenderId(user._id);
+    }
+  }, [user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -37,16 +45,6 @@ const SendMessageForm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="senderId">Sender ID:</label>
-          <input
-            type="text"
-            id="senderId"
-            value={senderId}
-            onChange={(e) => setSenderId(e.target.value)}
-            required
-          />
-        </div>
         <div>
           <label htmlFor="message">Message:</label>
           <textarea
