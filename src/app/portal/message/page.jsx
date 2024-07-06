@@ -9,6 +9,8 @@ const SendMessageForm = () => {
   const [message, setMessage] = useState("");
   const [confirmedBy, setConfirmedBy] = useState("");
 
+  console.log(user);
+
   useEffect(() => {
     if (user && user._id) {
       setSenderId(user._id);
