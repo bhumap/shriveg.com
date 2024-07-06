@@ -102,7 +102,7 @@ const Page = () => {
                 <h4>Mumbai</h4>
               </div>
               <div className="message-hed-in">
-                <h4>{message.message}</h4>
+                <h4>{message.confirmedBy}</h4>
               </div>
               <div className="message-hed-in">
                 {!message.confirmed && (
@@ -110,7 +110,7 @@ const Page = () => {
                     className="oder-btn"
                     onClick={() => handleConfirmMessage(message.UniqueId)}
                   >
-                    {message.confirmed ? "Yes" : "No"}
+                    {message.confirmed ? "Yes" : "Pending"}
                   </button>
                 )}
                 {message.confirmed && (
