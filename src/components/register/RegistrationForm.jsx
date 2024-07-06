@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -7,22 +7,55 @@ import { useRouter } from "next/navigation";
 import { AuthContext } from "@/context/AuthContext";
 
 const RegistrationForm = () => {
-
-  var {refetch} = useContext(AuthContext)
+  var { refetch } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(false);
-  var router = useRouter()
+  var router = useRouter();
   const [formData, setFormData] = useState({
     userType: "Customer",
     email: {
       value: "",
     },
     phone: {
-      value:""
+      value: "",
     },
     fullName: "",
     password: "",
+    location: {
+      lat: "",
+      lng: "",
+    },
   });
+
+  useEffect(() => {
+    // Function to fetch user's current location
+    const fetchLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            setFormData({
+              ...formData,
+              location: {
+                lat: latitude,
+                lng: longitude,
+              },
+            });
+          },
+          (error) => {
+            console.error("Error getting geolocation:", error);
+            // Handle error here
+          }
+        );
+      } else {
+        console.error("Geolocation is not supported by this browser.");
+        // Handle unsupported case
+      }
+    };
+
+    // Fetch location on component mount
+    fetchLocation();
+  }, []);
 
   const changeHandler = (e) => {
     const name = e.target.name;
@@ -53,8 +86,8 @@ const RegistrationForm = () => {
           type: "success",
           isLoading: false,
         });
-        refetch()
-        router.push("/")
+        refetch();
+        router.push("/");
 
         setTimeout(() => {
           toast.dismiss(id);
@@ -87,7 +120,7 @@ const RegistrationForm = () => {
               <form className="space-y-4 md:space-y-6" onSubmit={submitHandler}>
                 <div>
                   <label
-                    htmlFor="email"
+                    htmlFor="userType"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
                     Register As
@@ -97,10 +130,10 @@ const RegistrationForm = () => {
                     <div>
                       <input
                         type="radio"
-                        checked={formData.userType == "Customer"}
+                        checked={formData.userType === "Customer"}
                         onChange={changeHandler}
                         disabled={loading}
-                        className="mr-2  text-primary focus:outline-none focus:ring-0"
+                        className="mr-2 text-primary focus:outline-none focus:ring-0"
                         value="Customer"
                         name="userType"
                         id="customer"
@@ -110,7 +143,7 @@ const RegistrationForm = () => {
                     <div>
                       <input
                         type="radio"
-                        checked={formData.userType == "Chef"}
+                        checked={formData.userType === "Chef"}
                         onChange={changeHandler}
                         disabled={loading}
                         className="mr-2 text-primary focus:outline-none focus:ring-0"
@@ -119,6 +152,19 @@ const RegistrationForm = () => {
                         id="chef"
                       />
                       <label htmlFor="chef">Chef</label>
+                    </div>
+                    <div>
+                      <input
+                        type="radio"
+                        checked={formData.userType === "Delivery_Boy"}
+                        onChange={changeHandler}
+                        disabled={loading}
+                        className="mr-2 text-primary focus:outline-none focus:ring-0"
+                        value="Delivery_Boy"
+                        name="userType"
+                        id="delivery_boy"
+                      />
+                      <label htmlFor="delivery_boy">Delivery Boy</label>
                     </div>
                   </div>
                 </div>
@@ -142,8 +188,7 @@ const RegistrationForm = () => {
                     disabled={loading}
                   />
                 </div>
-                
-             
+
                 <div>
                   <label
                     htmlFor="email"
@@ -167,7 +212,6 @@ const RegistrationForm = () => {
                     }
                   />
                 </div>
-              
 
                 <div>
                   <label
@@ -188,31 +232,91 @@ const RegistrationForm = () => {
                       setFormData({
                         ...formData,
                         phone: { value: e.target.value },
-                      })}
+                      })
+                    }
                     disabled={loading}
                   />
                 </div>
 
-                {formData.userType == "Chef" &&
-                <div>
-                  <label
-                    htmlFor="username"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Username
-                  </label>
+                {formData.userType === "Chef" && (
+                  <div>
+                    <label
+                      htmlFor="username"
+                      className="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      Username
+                    </label>
 
-                  <input
-                    type="text"
-                    name="username"
-                    id="username"
-                    placeholder="Enter Username"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                    required={true}
-                    onChange={changeHandler}
-                    disabled={loading}
-                  />
-                </div>}
+                    <input
+                      type="text"
+                      name="username"
+                      id="username"
+                      placeholder="Enter Username"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                      required={true}
+                      onChange={changeHandler}
+                      disabled={loading}
+                    />
+                  </div>
+                )}
+
+                {formData.userType === "Delivery_Boy" && (
+                  <>
+                    <div>
+                      <label
+                        htmlFor="latitude"
+                        className="block mb-2 text-sm font-medium text-gray-900"
+                      >
+                        Latitude
+                      </label>
+                      <input
+                        type="text"
+                        name="location.lat"
+                        id="latitude"
+                        placeholder="Enter Latitude"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                        value={formData.location.lat}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            location: {
+                              ...formData.location,
+                              lat: e.target.value,
+                            },
+                          })
+                        }
+                        disabled={loading}
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="longitude"
+                        className="block mb-2 text-sm font-medium text-gray-900"
+                      >
+                        Longitude
+                      </label>
+                      <input
+                        type="text"
+                        name="location.lng"
+                        id="longitude"
+                        placeholder="Enter Longitude"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                        value={formData.location.lng}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            location: {
+                              ...formData.location,
+                              lng: e.target.value,
+                            },
+                          })
+                        }
+                        disabled={loading}
+                      />
+                    </div>
+                  </>
+                )}
 
                 <div>
                   <label
@@ -233,152 +337,6 @@ const RegistrationForm = () => {
                     disabled={loading}
                   />
                 </div>
-
-
-
-                {/* Address Section */}
-                {formData.userType == "Chef" ?
-                  <>
-                  <div>
-                    <label
-                      htmlFor="address.line1"
-                      className="block mb-2 text-sm font-medium text-gray-900"
-                    >
-                      Address Line 1
-                    </label>
-  
-                    <input
-                      type="text"
-                      name="address.line1"
-                      id="address.line1"
-                      placeholder="Address"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                      onChange={changeHandler}
-                      disabled={loading}
-                    />
-                  </div>
-                  
-                  <div>
-                    <label
-                      htmlFor="address.line1"
-                      className="block mb-2 text-sm font-medium text-gray-900"
-                    >
-                      Address Line 2
-                    </label>
-  
-                    <input
-                      type="text"
-                      name="address.line2"
-                      id="address.line2"
-                      placeholder="Address"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                      onChange={changeHandler}
-                      disabled={loading}
-                    />
-                  </div>
-  
-                  <div>
-                    <label
-                      htmlFor="address.line1"
-                      className="block mb-2 text-sm font-medium text-gray-900"
-                    >
-                      Address Line 3
-                    </label>
-  
-                    <input
-                      type="text"
-                      name="address.line3"
-                      id="address.line3"
-                      placeholder="Address"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                      onChange={changeHandler}
-                      disabled={loading}
-                    />
-                  </div>
-  
-                  <div>
-                    <label
-                      htmlFor="address.cityTown"
-                      className="block mb-2 text-sm font-medium text-gray-900"
-                    >
-                      City / Town
-                    </label>
-  
-                    <input
-                      type="text"
-                      name="address.cityTown"
-                      id="address.cityTown"
-                      placeholder="Address"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                      required={true}
-                      onChange={changeHandler}
-                      disabled={loading}
-                    />
-                  </div>
-  
-                  <div>
-                    <label
-                      htmlFor="address.district"
-                      className="block mb-2 text-sm font-medium text-gray-900"
-                    >
-                      District
-                    </label>
-  
-                    <input
-                      type="text"
-                      name="address.district"
-                      id="address.district"
-                      placeholder="Address"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                      required={true}
-                      onChange={changeHandler}
-                      disabled={loading}
-                    />
-                  </div>
-  
-                  <div>
-                    <label
-                      htmlFor="address.state"
-                      className="block mb-2 text-sm font-medium text-gray-900"
-                    >
-                      State
-                    </label>
-  
-                    <input
-                      type="text"
-                      name="address.state"
-                      id="address.state"
-                      placeholder="State"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                      required={true}
-                      onChange={changeHandler}
-                      disabled={loading}
-                    />
-                  </div>
-  
-                  <div>
-                    <label
-                      htmlFor="address.pinCode"
-                      className="block mb-2 text-sm font-medium text-gray-900"
-                    >
-                      Pin Code
-                    </label>
-  
-                    <input
-                      type="text"
-                      name="address.pinCode"
-                      id="address.pinCode"
-                      placeholder="Area Pin Code"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                      required={true}
-                      onChange={changeHandler}
-                      disabled={loading}
-                    />
-                  </div>
-                  </>
-                : null}
-                
-
 
                 <button
                   type="submit"

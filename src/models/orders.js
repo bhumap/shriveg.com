@@ -67,6 +67,11 @@ const orderSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    deliveryBoy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: false,
+    },
     isCompleted: {
       type: Boolean,
       default: false,
@@ -77,4 +82,3 @@ const orderSchema = new mongoose.Schema(
 );
 
 export default mongoose.models?.orders || mongoose.model("orders", orderSchema);
-

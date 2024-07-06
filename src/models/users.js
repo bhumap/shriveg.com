@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     default: "Customer",
-    enum: ["Admin", "Customer", "Chef"],
+    enum: ["Admin", "Customer", "Chef", "Delivery_Boy"],
   },
   email: {
     value: {
@@ -32,8 +32,8 @@ const userSchema = new mongoose.Schema({
     },
     isVarified: {
       type: Boolean,
-      default:false,
-      required:true,
+      default: false,
+      required: true,
     },
   },
   password: {
@@ -60,15 +60,20 @@ const userSchema = new mongoose.Schema({
     pinCode: { type: String },
   },
   location: {
-    lat: Number,
-    lng: Number,
+    lat: {
+      type: Number,
+      required: function() { return this.userType === 'Delivery_Boy'; } // Only required for Delivery Boy
+    },
+    lng: {
+      type: Number,
+      required: function() { return this.userType === 'Delivery_Boy'; } // Only required for Delivery Boy
+    },
   },
   isApproved: {
     type: Boolean,
     default: false,
     required: true,
   },
-
   vacationStatus: {
     type: Boolean,
     default: false,
@@ -76,31 +81,26 @@ const userSchema = new mongoose.Schema({
   },
   vacationfromDate: {
     type: Date,
-    default:""
+    default: "",
   },
   vacationtoDate: {
     type: Date,
-    default:""
-
+    default: "",
   },
-
   isActive: {
     type: Boolean,
     default: true,
     required: true,
   },
-
   // for firebase notifications
   deviceTokens: [String],
-
-  wollet:{
-    balance:{
-      type:Number,
-      default:0,
-      required:true
+  wallet: {
+    balance: {
+      type: Number,
+      default: 0,
+      required: true,
     },
   },
-
 });
 
 export default mongoose.models?.users || mongoose.model("users", userSchema);

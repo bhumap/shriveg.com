@@ -30,14 +30,14 @@ const LoginForm = () => {
       setLoading(true);
       id = toast.loading("Please wait...");
       const res = await axios.post("/api/auth/login", formData);
-
+      localStorage.setItem("userId", res.data._id);
       if (res.data.success) {
         toast.update(id, {
           render: res.data.message,
           type: "success",
           isLoading: false,
         });
-        router.push("/");
+        // router.push("/");
         refetch();
       }
     } catch (error) {
