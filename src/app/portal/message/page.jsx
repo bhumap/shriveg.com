@@ -6,7 +6,7 @@ import { AuthContext } from "@/context/AuthContext";
 const SendMessageForm = () => {
   const { user } = useContext(AuthContext);
   const [senderId, setSenderId] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("New Oder");
   const [confirmedBy, setConfirmedBy] = useState("");
 
 
