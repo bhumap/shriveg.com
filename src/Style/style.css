@@ -388,7 +388,7 @@ button:hover {
 .message-heading{
   height: 45px;
   width: 100%;
-  background-color: #065912;
+  background-color: #d1d5db;
   display: flex;
   gap: 10px;
   justify-content: space-between;
@@ -406,7 +406,10 @@ button:hover {
 }
 .oder-btn{
   padding: 5px;
-  background-color: yellow;
+  background-color: #065912;
+  border-radius: 10px;
+  font-size: 14px;
+  color: white;
   border-radius: 10px;
 }
 
