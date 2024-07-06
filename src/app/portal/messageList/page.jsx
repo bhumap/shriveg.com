@@ -3,11 +3,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import axios from "axios";
+import "@/Style/style.css";
 
 const Page = () => {
   const { user } = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
   const [userId, setUserId] = useState("");
+
+  console.log(user?.address);
 
   useEffect(() => {
     if (user && user._id) {
@@ -58,26 +61,79 @@ const Page = () => {
   };
 
   return (
-    <div>
-      <h2>Messages for User ID: {userId}</h2>
+    <div className="addmessage-box">
+      <div className="message-heading message-heading1">
+        <div className="message-hed-in">
+          <h4>Oders</h4>
+        </div>
+        <div className="message-hed-in">
+          <h4>Message</h4>
+        </div>
+        <div className="message-hed-in">
+          <h4>To</h4>
+        </div>
+        <div className="message-hed-in">
+          <h4>From</h4>
+        </div>
+        <div className="message-hed-in">
+          <h4>Accepted By</h4>
+        </div>
+        <div className="message-hed-in">
+          <h4>Oder Accepte</h4>
+        </div>
+      </div>
+
       {messages?.length === 0 ? (
         <p>No messages found.</p>
       ) : (
-        <ul>
-          {messages?.map((message) => (
-            <li key={message._id}>
-              <p>Sender: {message.sender}</p>
-              <p>Receiver: {message.receiver}</p>
-              <p>Message: {message.message}</p>
-              <p>Confirmed: {message.confirmed ? "Yes" : "No"}</p>
-              {!message.confirmed && (
-                <button onClick={() => handleConfirmMessage(message.UniqueId)}>
-                  Confirm Message
-                </button>
-              )}
-            </li>
+        <>
+          {messages?.map((message, index) => (
+            <div className="message-heading" key={message._id}>
+              <div className="message-hed-in">
+                <h4>.{index}</h4>
+              </div>
+              <div className="message-hed-in">
+                <h4>{message.message}</h4>
+              </div>
+              <div className="message-hed-in">
+                <h4>Delhi</h4>
+              </div>
+              <div className="message-hed-in">
+                <h4>Mumbai</h4>
+              </div>
+              <div className="message-hed-in">
+                <h4>{message.message}</h4>
+              </div>
+              <div className="message-hed-in">
+                {!message.confirmed && (
+                  <button
+                    className="oder-btn"
+                    onClick={() => handleConfirmMessage(message.UniqueId)}
+                  >
+                    {message.confirmed ? "Yes" : "No"}
+                  </button>
+                )}
+                {message.confirmed && (
+                  <button className="oder-btn">Confirm</button>
+                )}
+              </div>
+            </div>
           ))}
-        </ul>
+        </>
+        // <ul>
+        //   {messages?.map((message) => (
+        //     <li key={message._id}>
+
+        //       <p>Message: {message.message}</p>
+        //       <p>Confirmed: {message.confirmed ? "Yes" : "No"}</p>
+        // {!message.confirmed && (
+        //   <button onClick={() => handleConfirmMessage(message.UniqueId)}>
+        //     Confirm Message
+        //   </button>
+        // )}
+        //     </li>
+        //   ))}
+        // </ul>
       )}
     </div>
   );

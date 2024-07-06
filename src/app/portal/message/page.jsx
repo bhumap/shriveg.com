@@ -9,7 +9,6 @@ const SendMessageForm = () => {
   const [message, setMessage] = useState("");
   const [confirmedBy, setConfirmedBy] = useState("");
 
-  console.log(user);
 
   useEffect(() => {
     if (user && user._id) {
@@ -38,6 +37,7 @@ const SendMessageForm = () => {
       }
 
       const data = await response.json();
+      alert("Message sent successfully")
       console.log("Message sent successfully:", data);
     } catch (error) {
       console.error("Error sending message:", error.message);
