@@ -39,6 +39,11 @@ const Layout = ({ children }) => {
       href: "/portal/availability",
     },
 
+    user?.userType === "Chef" && {
+      label: "Push",
+      href: "/portal/message",
+    },
+
     user?.userType === "Delivery_Boy" && {
       label: "My Oders",
       href: "/messageList",
