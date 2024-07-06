@@ -49,7 +49,14 @@ const Page = () => {
         throw new Error("Failed to confirm message.");
       }
 
-      await fetchMessages();
+      // Optimistically update the UI
+      setMessages((prevMessages) =>
+        prevMessages.map((message) =>
+          message.UniqueId === UniqueId
+            ? { ...message, confirmed: true, confirmedBy: conf }
+            : message
+        )
+      );
     } catch (error) {
       console.error("Error confirming message:", error.message);
     }
@@ -59,7 +66,7 @@ const Page = () => {
     <div className="addmessage-box">
       <div className="message-heading message-heading1">
         <div className="message-hed-in">
-          <h4>Oders</h4>
+          <h4>Orders</h4>
         </div>
         <div className="message-hed-in">
           <h4>Message</h4>
@@ -74,7 +81,7 @@ const Page = () => {
           <h4>Accepted By</h4>
         </div>
         <div className="message-hed-in">
-          <h4>Oder Accepte</h4>
+          <h4>Order Accept</h4>
         </div>
       </div>
 
@@ -85,7 +92,7 @@ const Page = () => {
           {messages.map((message, index) => (
             <div className="message-heading" key={message._id}>
               <div className="message-hed-in">
-                <h4>.{index + 1}</h4>
+                <h4>{index + 1}</h4>
               </div>
               <div className="message-hed-in">
                 <h4>{message.message}</h4>
