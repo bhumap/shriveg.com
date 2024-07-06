@@ -9,32 +9,32 @@ const Page = () => {
   const { user } = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
   const [userId, setUserId] = useState("");
-
-  console.log(user?.address);
+  const [conf, setConf] = useState("");
 
   useEffect(() => {
     if (user && user._id) {
       setUserId(user._id);
+      setConf(user.fullName);
     }
   }, [user]);
 
-  useEffect(() => {
-    const fetchMessages = async () => {
-      if (userId) {
-        try {
-          const response = await axios.get(`/api/getMessage?userId=${userId}`);
+  const fetchMessages = async () => {
+    if (userId) {
+      try {
+        const response = await axios.get(`/api/getMessage?userId=${userId}`);
 
-          if (!response.data.success) {
-            throw new Error("Failed to fetch messages.");
-          }
-
-          setMessages(response.data.data);
-        } catch (error) {
-          console.error("Error fetching messages:", error.message);
+        if (!response.data.success) {
+          throw new Error("Failed to fetch messages.");
         }
-      }
-    };
 
+        setMessages(response.data.data);
+      } catch (error) {
+        console.error("Error fetching messages:", error.message);
+      }
+    }
+  };
+
+  useEffect(() => {
     fetchMessages();
   }, [userId]);
 
@@ -42,19 +42,14 @@ const Page = () => {
     try {
       const response = await axios.put(`/api/sendMessage`, {
         UniqueId,
-        confirmedBy: "Shamsher",
+        confirmedBy: conf,
       });
 
       if (!response.data.success) {
         throw new Error("Failed to confirm message.");
       }
 
-      const updatedMessages = messages.map((message) =>
-        message.UniqueId === UniqueId
-          ? { ...message, confirmed: true, confirmedBy: "Shamsher" }
-          : message
-      );
-      setMessages(updatedMessages);
+      await fetchMessages();
     } catch (error) {
       console.error("Error confirming message:", error.message);
     }
@@ -83,14 +78,14 @@ const Page = () => {
         </div>
       </div>
 
-      {messages?.length === 0 ? (
+      {messages.length === 0 ? (
         <p>No messages found.</p>
       ) : (
         <>
-          {messages?.map((message, index) => (
+          {messages.map((message, index) => (
             <div className="message-heading" key={message._id}>
               <div className="message-hed-in">
-                <h4>.{index}</h4>
+                <h4>.{index + 1}</h4>
               </div>
               <div className="message-hed-in">
                 <h4>{message.message}</h4>
@@ -120,20 +115,6 @@ const Page = () => {
             </div>
           ))}
         </>
-        // <ul>
-        //   {messages?.map((message) => (
-        //     <li key={message._id}>
-
-        //       <p>Message: {message.message}</p>
-        //       <p>Confirmed: {message.confirmed ? "Yes" : "No"}</p>
-        // {!message.confirmed && (
-        //   <button onClick={() => handleConfirmMessage(message.UniqueId)}>
-        //     Confirm Message
-        //   </button>
-        // )}
-        //     </li>
-        //   ))}
-        // </ul>
       )}
     </div>
   );
