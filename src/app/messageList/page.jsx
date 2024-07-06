@@ -6,6 +6,7 @@ import axios from "axios";
 
 const Page = () => {
   const { user } = useContext(AuthContext);
+  console.log(user);
   const [messages, setMessages] = useState([]);
   const [userId, setUserId] = useState("6688d33435c99e0937ea749c");
 

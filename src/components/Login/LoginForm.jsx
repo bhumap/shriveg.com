@@ -31,6 +31,7 @@ const LoginForm = () => {
       id = toast.loading("Please wait...");
       const res = await axios.post("/api/auth/login", formData);
       localStorage.setItem("userId", res.data._id);
+      console.log(res.data._id);
       if (res.data.success) {
         toast.update(id, {
           render: res.data.message,
