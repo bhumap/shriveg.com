@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useContext } from "react";
 import axios from "axios";
@@ -8,12 +8,14 @@ const UpdateLocation = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
+    if (!user) return;
+
     const updateLocation = async (lat, lng) => {
       try {
         await axios.put('/api/updateLocation', {
           userId: user._id,
           lat,
-          lng
+          lng,
         });
       } catch (error) {
         console.error("Failed to update location:", error.message);
@@ -21,7 +23,7 @@ const UpdateLocation = () => {
     };
 
     if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(
+      const watchId = navigator.geolocation.watchPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
           updateLocation(latitude, longitude);
@@ -31,6 +33,9 @@ const UpdateLocation = () => {
         },
         { enableHighAccuracy: true, maximumAge: 0 }
       );
+
+      // Clean up the watcher on component unmount
+      return () => navigator.geolocation.clearWatch(watchId);
     }
   }, [user]);
 

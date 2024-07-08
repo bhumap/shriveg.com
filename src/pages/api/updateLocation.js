@@ -1,4 +1,3 @@
-
 import dbConnect from "@/config/dbConnect";
 import UsersModel from "@/models/users";
 
@@ -19,8 +18,10 @@ export default async function handler(req, res) {
       const user = await UsersModel.findByIdAndUpdate(
         userId,
         {
-          "location.lat": lat,
-          "location.lng": lng
+          location: {
+            type: "Point",
+            coordinates: [lng, lat] // Store as [longitude, latitude]
+          }
         },
         { new: true }
       );
@@ -35,6 +36,7 @@ export default async function handler(req, res) {
       res.status(200).json({
         success: true,
         message: "Location updated successfully.",
+        data: user // Return the updated user data
       });
     } catch (error) {
       console.error(error);
