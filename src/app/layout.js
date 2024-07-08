@@ -16,9 +16,7 @@ const queryClient = new QueryClient();
 import "react-loading-skeleton/dist/skeleton.css";
 import { useEffect } from "react";
 import FCM from "@/components/FCM";
-
-
-
+import UpdateLocation from "@/components/common/UpdateLocation";
 
 export default function RootLayout({ children }) {
   var pathname = usePathname();
@@ -36,16 +34,15 @@ export default function RootLayout({ children }) {
           <PrimeReactProvider>
             <Context>
               <CartProvider>
-
                 {/* Toasting */}
                 <ToastContainer position="bottom-right" />
                 <Toaster position="top-center" />
-
 
                 {/* Firebase Cloud Messaging */}
                 <FCM />
 
                 <Navbar />
+                <UpdateLocation />
                 <main className="min-h-screen bg-gray-50">{children}</main>
                 <Footer />
               </CartProvider>

@@ -62,11 +62,15 @@ const userSchema = new mongoose.Schema({
   location: {
     lat: {
       type: Number,
-      required: function() { return this.userType === 'Delivery_Boy'; } // Only required for Delivery Boy
+      required: function () {
+        return this.userType === "Delivery_Boy";
+      },
     },
     lng: {
       type: Number,
-      required: function() { return this.userType === 'Delivery_Boy'; } // Only required for Delivery Boy
+      required: function () {
+        return this.userType === "Delivery_Boy";
+      },
     },
   },
   isApproved: {
@@ -92,7 +96,6 @@ const userSchema = new mongoose.Schema({
     default: true,
     required: true,
   },
-  // for firebase notifications
   deviceTokens: [String],
   wallet: {
     balance: {
@@ -102,5 +105,7 @@ const userSchema = new mongoose.Schema({
     },
   },
 });
+
+userSchema.index({ "location.lng": 1, "location.lat": 1 });
 
 export default mongoose.models?.users || mongoose.model("users", userSchema);
