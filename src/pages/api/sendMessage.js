@@ -1,5 +1,3 @@
-// pages/api/sendMessage.js
-
 import dbConnect from '@/config/dbConnect';
 import Message from '@/models/messages';
 import UsersModel from '@/models/users';
@@ -12,6 +10,14 @@ export default async function handler(req, res) {
     try {
       const { senderId, message, confirmedBy } = req.body;
 
+      // Ensure senderId is valid ObjectId
+      if (!mongoose.Types.ObjectId.isValid(senderId)) {
+        return res.status(400).json({
+          success: false,
+          message: 'Invalid senderId.',
+        });
+      }
+
       // Find sender
       const sender = await UsersModel.findById(senderId);
       if (!sender) {
@@ -21,27 +27,46 @@ export default async function handler(req, res) {
         });
       }
 
-      const receivers = await UsersModel.find({ userType: 'Delivery_Boy' });
+      // Find delivery boys within maxDistance radius of sender's location
+      const maxDistance = 3; // in km
+      const deliveryBoys = await UsersModel.aggregate([
+        {
+          $geoNear: {
+            near: { type: 'Point', coordinates: [sender.location.lng, sender.location.lat] },
+            distanceField: 'dist.calculated',
+            maxDistance: maxDistance * 1000, // Convert to meters
+            spherical: true,
+            query: { userType: 'Delivery_Boy', isActive: true },
+          },
+        },
+      ]);
 
-      if (!receivers || receivers.length === 0) {
+      if (!deliveryBoys || deliveryBoys.length === 0) {
         return res.status(404).json({
           success: false,
-          message: 'No delivery boys found.',
+          message: 'No delivery boys found within 3km radius.',
         });
       }
 
-      const uniqueId = uuidv4(); // Generate a unique ID
+      // Generate a unique ID for messages
+      const uniqueId = uuidv4();
 
+      // Create messages for each delivery boy found
       const messages = await Promise.all(
-        receivers.map(async (receiver) => {
-          const newMessage = await Message.create({
-            sender: senderId,
-            receiver: receiver._id,
-            message,
-            confirmedBy: confirmedBy,
-            UniqueId: uniqueId, // Assign the unique ID to each message
-          });
-          return newMessage;
+        deliveryBoys.map(async (receiver) => {
+          try {
+            const newMessage = await Message.create({
+              sender: senderId,
+              receiver: receiver._id,
+              message,
+              confirmedBy,
+              UniqueId: uniqueId,
+            });
+            return newMessage;
+          } catch (error) {
+            console.error('Error creating message:', error);
+            throw new Error('Message creation failed.');
+          }
         })
       );
 
@@ -50,18 +75,18 @@ export default async function handler(req, res) {
         message: 'Messages sent successfully!',
         data: messages,
       });
-
     } catch (error) {
-      console.error(error);
+      console.error('Error sending messages:', error);
       res.status(500).json({
         success: false,
         message: 'Messages could not be sent.',
       });
     }
-  }  else if (req.method === 'PUT') {
+  } else if (req.method === 'PUT') {
     try {
       const { UniqueId, confirmedBy } = req.body;
 
+      // Validate UniqueId
       if (!UniqueId) {
         return res.status(400).json({
           success: false,
@@ -69,8 +94,7 @@ export default async function handler(req, res) {
         });
       }
 
-      
-      // Update all messages with the given uniqueId
+      // Update messages with the given UniqueId
       const updatedMessage = await Message.updateMany(
         { UniqueId },
         { confirmed: true, confirmedBy },
@@ -89,15 +113,14 @@ export default async function handler(req, res) {
         message: 'Message confirmation updated successfully!',
         data: updatedMessage,
       });
-
     } catch (error) {
-      console.error(error);
+      console.error('Error updating message confirmation:', error);
       res.status(500).json({
         success: false,
         message: 'Message confirmation could not be updated.',
       });
     }
-  }  else {
+  } else {
     res.setHeader('Allow', ['POST', 'PUT']);
     res.status(405).json({
       success: false,

@@ -21,10 +21,8 @@ const RegistrationForm = () => {
     },
     fullName: "",
     password: "",
-    location: {
-      lat: "",
-      lng: "",
-    },
+    lat: "",
+    lng: "",
   });
 
   useEffect(() => {
@@ -36,10 +34,9 @@ const RegistrationForm = () => {
             const { latitude, longitude } = position.coords;
             setFormData({
               ...formData,
-              location: {
-                lat: latitude,
-                lng: longitude,
-              },
+
+              lat: latitude,
+              lng: longitude,
             });
           },
           (error) => {
@@ -78,8 +75,18 @@ const RegistrationForm = () => {
       e.preventDefault();
       setLoading(true);
       id = toast.loading("Please wait...");
-      const res = await axios.post("/api/auth/register", formData);
-
+  
+      // Ensure formData has correct structure for location
+      const formDataToSend = {
+        ...formData,
+        location: {
+          type: "Point",
+          coordinates: [parseFloat(formData.lng), parseFloat(formData.lat)],
+        },
+      };
+  
+      const res = await axios.post("/api/auth/register", formDataToSend);
+  
       if (res.data.success) {
         toast.update(id, {
           render: res.data.message,
@@ -88,7 +95,7 @@ const RegistrationForm = () => {
         });
         refetch();
         router.push("/");
-
+  
         setTimeout(() => {
           toast.dismiss(id);
           setLoading(false);
@@ -271,16 +278,16 @@ const RegistrationForm = () => {
                       </label>
                       <input
                         type="text"
-                        name="location.lat"
+                        name="lat"
                         id="latitude"
                         placeholder="Enter Latitude"
                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                        value={formData.location.lat}
+                        value={formData.lat}
                         onChange={(e) =>
                           setFormData({
                             ...formData,
                             location: {
-                              ...formData.location,
+                              ...formData,
                               lat: e.target.value,
                             },
                           })
@@ -302,12 +309,12 @@ const RegistrationForm = () => {
                         id="longitude"
                         placeholder="Enter Longitude"
                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                        value={formData.location.lng}
+                        value={formData.lng}
                         onChange={(e) =>
                           setFormData({
                             ...formData,
                             location: {
-                              ...formData.location,
+                              ...formData,
                               lng: e.target.value,
                             },
                           })

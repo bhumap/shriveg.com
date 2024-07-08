@@ -60,9 +60,19 @@ const userSchema = new mongoose.Schema({
     pinCode: { type: String },
   },
   location: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      required: true,
+      default: "Point",
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+    },
+
     lat: {
       type: Number,
-
     },
     lng: {
       type: Number,
@@ -101,6 +111,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.index({ "location.lng": 1, "location.lat": 1 });
+userSchema.index({ location: "2dsphere" });
 
 export default mongoose.models?.users || mongoose.model("users", userSchema);
