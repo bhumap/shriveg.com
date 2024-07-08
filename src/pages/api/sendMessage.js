@@ -32,14 +32,15 @@ export default async function handler(req, res) {
       const receivers = await UsersModel.aggregate([
         {
           $geoNear: {
-            near: { type: "Point", coordinates: [senderLng, senderLat], },
-            distanceField: "dist.calculated",
+            near: { type: "Point", coordinates: [senderLng, senderLat] },
+            distanceField: "distance", // Corrected field name
             maxDistance: 3000, // 3 km
             spherical: true,
             query: { userType: "Delivery_Boy" },
           },
         },
       ]);
+      
 
       if (!receivers || receivers.length === 0) {
         return res.status(404).json({
