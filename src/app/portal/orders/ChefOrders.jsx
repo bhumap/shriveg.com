@@ -28,6 +28,10 @@ const ChefOrders = () => {
     fetchMyDishes();
   }, []);
 
+  function fetchOrder(){
+    console.log(orders);
+  }
+
   // --------------------
   const [showOrderDetail, setShowOrderDetail] = useState(false);
 
@@ -122,7 +126,9 @@ const ChefOrders = () => {
                     scope="row"
                     className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap"
                   >
-                    <Image width={600} height={400}
+                    <Image
+                      width={600}
+                      height={400}
                       className="w-6 sm:w-10 aspect-square rounded-full"
                       src={v?.user?.photo || "/images/user.png"}
                       alt="Jese image"
@@ -273,7 +279,9 @@ const ChefOrders = () => {
                 >
                   <div className="flex items-center  gap-2">
                     <div className="w-10 sm:w-20">
-                      <Image width={600} height={400}
+                      <Image
+                        width={600}
+                        height={400}
                         className="aspect-video object-cover"
                         src={
                           v?.dish?.images[0]?.secure_url || "/images/image.png"
@@ -310,11 +318,14 @@ const ChefOrders = () => {
             </div>
             <div className="flex px-4 justify-end">
               <div className=" text-xs text-gray-700">
-                {process.env.NEXT_PUBLIC_GST_PERCENTAGE*100}% GST : {orderDetail?.gst} ₹
+                {process.env.NEXT_PUBLIC_GST_PERCENTAGE * 100}% GST :{" "}
+                {orderDetail?.gst} ₹
               </div>
             </div>
             <div className="flex px-4 justify-end">
-              <div className=" text-xs text-gray-700">Shipping Fee : {orderDetail?.shipping}</div>
+              <div className=" text-xs text-gray-700">
+                Shipping Fee : {orderDetail?.shipping}
+              </div>
             </div>
             <div className="flex px-4 mb-4 justify-end">
               <div className="font-semibold text-base sm:text-2xl text-gray-700 flex items-start">
@@ -360,6 +371,14 @@ const ChefOrders = () => {
                             className="border py-2 px-4 bg-primary shadow-md text-white rounded-full "
                           >
                             Accept
+                          </button>
+
+                          <button 
+                             onClick={() =>
+                              fetchOrder()
+                            }
+                          className="border py-2 px-4 bg-primary shadow-md text-white rounded-full ">
+                            Push
                           </button>
                         </React.Fragment>
                       );
