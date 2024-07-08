@@ -5,15 +5,15 @@ import { AuthContext } from "@/context/AuthContext";
 
 const SendMessageForm = () => {
   const { user } = useContext(AuthContext);
-  const [senderId, setSenderId] = useState("668b96acb60ad9fb0faa4461");
+  const [senderId, setSenderId] = useState("");
   const [message, setMessage] = useState("New Order");
   const [confirmedBy, setConfirmedBy] = useState("");
 
-  // useEffect(() => {
-  //   if (user && user._id) {
-  //     setSenderId(user._id);
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    if (user && user._id) {
+      setSenderId(user._id);
+    }
+  }, [user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
