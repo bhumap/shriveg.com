@@ -22,6 +22,7 @@ export default async function handler(req, res) {
       const R = 6371; // Radius of the Earth in km
       const maxDistance = 3; // Maximum distance in km
 
+      // Query delivery boys within 3km radius of sender
       const deliveryBoys = await UsersModel.aggregate([
         {
           $geoNear: {
@@ -43,13 +44,14 @@ export default async function handler(req, res) {
 
       const uniqueId = uuidv4();
 
+      // Create messages for each delivery boy
       const messages = await Promise.all(
         deliveryBoys.map(async (receiver) => {
           const newMessage = await Message.create({
             sender: senderId,
             receiver: receiver._id,
             message,
-            confirmedBy: confirmedBy,
+            confirmedBy,
             UniqueId: uniqueId,
           });
           return newMessage;
@@ -62,10 +64,11 @@ export default async function handler(req, res) {
         data: messages,
       });
     } catch (error) {
-      console.error(error);
+      console.error("Error sending messages:", error);
       res.status(500).json({
         success: false,
-        message: "Messages could not be sent.",
+        message: "Messages could not be sent. Please try again.",
+        error: error.message, // Include error message for debugging
       });
     }
   } else if (req.method === "PUT") {
@@ -79,6 +82,7 @@ export default async function handler(req, res) {
         });
       }
 
+      // Update message confirmation status
       const updatedMessage = await Message.updateMany(
         { UniqueId },
         { confirmed: true, confirmedBy },
@@ -98,10 +102,11 @@ export default async function handler(req, res) {
         data: updatedMessage,
       });
     } catch (error) {
-      console.error(error);
+      console.error("Error updating message confirmation:", error);
       res.status(500).json({
         success: false,
-        message: "Message confirmation could not be updated.",
+        message: "Message confirmation could not be updated. Please try again.",
+        error: error.message, // Include error message for debugging
       });
     }
   } else {
