@@ -1,6 +1,7 @@
 import dbConnect from '@/config/dbConnect';
 import Message from '@/models/messages';
 import UsersModel from '@/models/users';
+import admin from '@/config/firebaseAdmin';
 import { v4 as uuidv4 } from 'uuid';
 import { calculateDistance } from '@/config/distanceCalculator';
 
@@ -73,6 +74,28 @@ export default async function handler(req, res) {
             confirmedBy: confirmedBy,
             UniqueId: uniqueId, // Assign the unique ID to each message
           });
+
+          // Send push notification
+          const payload = {
+            notification: {
+              title: 'New Message',
+              body: message,
+            },
+            data: {
+              senderId: senderId.toString(),
+              receiverId: receiver._id.toString(),
+              uniqueId: uniqueId,
+            },
+          };
+
+          const options = {
+            priority: 'high',
+            timeToLive: 60 * 60 * 24, // 1 day
+          };
+
+          const tokens = receiver.deviceTokens; // Device tokens of the receiver
+          await admin.messaging().sendToDevice(tokens, payload, options);
+
           return newMessage;
         })
       );
