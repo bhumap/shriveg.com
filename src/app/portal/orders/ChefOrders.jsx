@@ -10,6 +10,7 @@ const ChefOrders = () => {
 
   var [orders, setOrders] = useState({});
   const [dish, setDish] = useState({});
+  const [order, setOrder] = useState({});
   var [loading, setLoading] = useState(false);
 
   var fetchMyDishes = async () => {
@@ -31,9 +32,11 @@ const ChefOrders = () => {
 
 
 
-  const handlePushClick = (dishData) => {
+  const handlePushClick = (dishData, orderData) => {
     setDish(dishData);
+    setOrder(orderData);
     console.log(dish);
+    console.log(order);
   };
 
   // --------------------
@@ -305,7 +308,7 @@ const ChefOrders = () => {
 
                   <button
                     className="border py-2 px-4 bg-primary shadow-md text-white rounded-full"
-                    onClick={() => handlePushClick(v.dish)}
+                    onClick={() => handlePushClick(v.dish, orderDetail)}
                   >
                     Push
                   </button>
@@ -426,6 +429,7 @@ const ChefOrders = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };
