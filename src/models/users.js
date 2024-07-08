@@ -62,15 +62,10 @@ const userSchema = new mongoose.Schema({
   location: {
     lat: {
       type: Number,
-      required: function () {
-        return this.userType === "Delivery_Boy";
-      },
+
     },
     lng: {
       type: Number,
-      required: function () {
-        return this.userType === "Delivery_Boy";
-      },
     },
   },
   isApproved: {

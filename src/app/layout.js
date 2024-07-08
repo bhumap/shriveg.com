@@ -42,7 +42,7 @@ export default function RootLayout({ children }) {
                 <FCM />
 
                 <Navbar />
-                <UpdateLocation />
+                {/* <UpdateLocation /> */}
                 <main className="min-h-screen bg-gray-50">{children}</main>
                 <Footer />
               </CartProvider>
