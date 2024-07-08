@@ -1,5 +1,3 @@
-// pages/api/sendMessage.js
-
 import dbConnect from "@/config/dbConnect";
 import Message from "@/models/messages";
 import UsersModel from "@/models/users";
