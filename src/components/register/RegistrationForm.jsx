@@ -21,38 +21,10 @@ const RegistrationForm = () => {
     },
     fullName: "",
     password: "",
-    lat: "",
-    lng: "",
+
   });
 
-  useEffect(() => {
-    // Function to fetch user's current location
-    const fetchLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            setFormData({
-              ...formData,
 
-              lat: latitude,
-              lng: longitude,
-            });
-          },
-          (error) => {
-            console.error("Error getting geolocation:", error);
-            // Handle error here
-          }
-        );
-      } else {
-        console.error("Geolocation is not supported by this browser.");
-        // Handle unsupported case
-      }
-    };
-
-    // Fetch location on component mount
-    fetchLocation();
-  }, []);
 
   const changeHandler = (e) => {
     const name = e.target.name;
@@ -76,14 +48,7 @@ const RegistrationForm = () => {
       setLoading(true);
       id = toast.loading("Please wait...");
   
-      // Ensure formData has correct structure for location
-      const formDataToSend = {
-        ...formData,
-        location: {
-          type: "Point",
-          coordinates: [parseFloat(formData.lng), parseFloat(formData.lat)],
-        },
-      };
+
   
       const res = await axios.post("/api/auth/register", formDataToSend);
   
@@ -244,86 +209,6 @@ const RegistrationForm = () => {
                     disabled={loading}
                   />
                 </div>
-
-                {formData.userType === "Chef" && (
-                  <div>
-                    <label
-                      htmlFor="username"
-                      className="block mb-2 text-sm font-medium text-gray-900"
-                    >
-                      Username
-                    </label>
-
-                    <input
-                      type="text"
-                      name="username"
-                      id="username"
-                      placeholder="Enter Username"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                      required={true}
-                      onChange={changeHandler}
-                      disabled={loading}
-                    />
-                  </div>
-                )}
-
-                {formData.userType === "Delivery_Boy" && (
-                  <>
-                    <div>
-                      <label
-                        htmlFor="latitude"
-                        className="block mb-2 text-sm font-medium text-gray-900"
-                      >
-                        Latitude
-                      </label>
-                      <input
-                        type="text"
-                        name="lat"
-                        id="latitude"
-                        placeholder="Enter Latitude"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                        value={formData.lat}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            location: {
-                              ...formData,
-                              lat: e.target.value,
-                            },
-                          })
-                        }
-                        disabled={loading}
-                      />
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="longitude"
-                        className="block mb-2 text-sm font-medium text-gray-900"
-                      >
-                        Longitude
-                      </label>
-                      <input
-                        type="text"
-                        name="location.lng"
-                        id="longitude"
-                        placeholder="Enter Longitude"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                        value={formData.lng}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            location: {
-                              ...formData,
-                              lng: e.target.value,
-                            },
-                          })
-                        }
-                        disabled={loading}
-                      />
-                    </div>
-                  </>
-                )}
 
                 <div>
                   <label

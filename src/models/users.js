@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     value: {
       type: String,
     },
-    isVarified: {
+    isVerified: {
       type: Boolean,
       default: false,
       required: true,
@@ -28,9 +28,8 @@ const userSchema = new mongoose.Schema({
     value: {
       type: String,
       unique: true,
-      // required:true,
     },
-    isVarified: {
+    isVerified: {
       type: Boolean,
       default: false,
       required: true,
@@ -63,20 +62,13 @@ const userSchema = new mongoose.Schema({
     type: {
       type: String,
       enum: ["Point"],
-      required: true,
       default: "Point",
     },
     coordinates: {
-      type: [Number],
-      required: true,
-    },
+      type: [Number]
 
-    lat: {
-      type: Number,
     },
-    lng: {
-      type: Number,
-    },
+  
   },
   isApproved: {
     type: Boolean,
@@ -90,11 +82,11 @@ const userSchema = new mongoose.Schema({
   },
   vacationfromDate: {
     type: Date,
-    default: "",
+    default: null, // Use null instead of empty string for default Date value
   },
   vacationtoDate: {
     type: Date,
-    default: "",
+    default: null, // Use null instead of empty string for default Date value
   },
   isActive: {
     type: Boolean,
@@ -111,6 +103,8 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+// Ensure index for location field
 userSchema.index({ location: "2dsphere" });
 
+// Export the model
 export default mongoose.models?.users || mongoose.model("users", userSchema);
