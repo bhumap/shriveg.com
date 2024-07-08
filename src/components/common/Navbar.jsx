@@ -13,6 +13,38 @@ const Navbar = () => {
   const router = useRouter()
   const { user,notifications,marksAsRead } = useContext(AuthContext);
   const {cartItems,setShowSideCart} = useContext(CartContext)
+  const [messages, setMessages] = useState([]);
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    if (user && user._id) {
+      setUserId(user._id);
+      setConf(user.fullName);
+    }
+  }, [user]);
+
+  const fetchMessages = async () => {
+    if (userId) {
+      try {
+        const response = await axios.get(`/api/getMessage?userId=${userId}`);
+
+        if (!response.data.success) {
+          throw new Error("Failed to fetch messages.");
+        }
+
+        setMessages(response.data.data);
+      } catch (error) {
+        console.error("Error fetching messages:", error.message);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchMessages();
+  }, [userId]);
+
+  console.log(messages);
+
   var pathname = usePathname();
 
   var [open, setOpen] = useState(false);
@@ -20,6 +52,7 @@ const Navbar = () => {
 
   var [showProfile, setShowProfile] = useState(false);
   var [showNotificationsBox,setShowNotificationsBox] = useState(false)
+  const [showMessagesBox, setShowMessagesBox] = useState(false);
 
   useEffect(() => {
     if (layer) {
@@ -298,36 +331,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {!pathname.startsWith("/portal") && <div className="block relative md:hidden mt-4">
-        <LoadScript
-          libraries={["places"]}
-          googleMapsApiKey="AIzaSyDa9wzMFWk03neKgcOmteJBKu6yjv-uE-w"
-        >
-          <Autocomplete>
-            <div className="relative">
-              <input
-                id="location"
-                className="block placeholder:opacity-0 focus:placeholder:opacity-100 pr-32 px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"
-                type="text"
-                placeholder="Enter Your Location"
-              />
-              <label
-                className="absolute rounded-md bg-white text-sm text-gray-500  duration-300 transform -translate-y-4 scale-[0.85] top-2 z-10 origin-[0]  px-2 peer-focus:px-2 peer-focus:text-priborder-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-[0.85] peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
-                htmlFor="location"
-              >
-                Your Location
-              </label>
-              <div
-                onClick={locateMe}
-                className="absolute select-none cursor-pointer hover:bg-gray-200 bg-gray-100 hover:border-gray-300 border border-transparent py-1 px-2 rounded-md top-1/2 flex items-center gap-1 -translate-y-1/2 right-2"
-              >
-                <i className="bx bx-current-location"></i>
-                <p className="text-sm">Locate me</p>
-              </div>
-            </div>
-          </Autocomplete>
-        </LoadScript>
-      </div>}
+
     </header>
   );
 };

@@ -9,13 +9,19 @@ const MessageSchema = new mongoose.Schema({
   },
   message: { type: String, required: true },
   
+  read: {
+    type: Boolean,
+    default: false,
+    required: true,
+  },
+
   confirmed: { type: Boolean, default: false },
   confirmedBy: {
     type: String,
   },
 
-  UniqueId: { type: String, Unique:true },
-  
+  UniqueId: { type: String, Unique: true },
+
   createdAt: { type: Date, default: Date.now },
 });
 
