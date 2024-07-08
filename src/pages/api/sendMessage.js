@@ -1,27 +1,12 @@
-// pages/api/sendNotification.js
-
-import admin from 'firebase-admin';
 import dbConnect from '@/config/dbConnect';
 import Message from '@/models/messages';
 import UsersModel from '@/models/users';
 import { v4 as uuidv4 } from 'uuid';
 import { calculateDistance } from '@/config/distanceCalculator';
 
-// Initialize Firebase Admin SDK
-const serviceAccount = require('@/config/shriveg-eb7c3-firebase-adminsdk-4utrd-b8462cb86e.json'); // Replace with your service account key path
-
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    // Add other configuration options as needed
-  });
-}
-
-// Connect to MongoDB
-dbConnect(); // Example function to connect MongoDB (adjust as per your setup)
-
-// API Route Handler to send push notification for messages
 export default async function handler(req, res) {
+  await dbConnect();
+
   if (req.method === 'POST') {
     try {
       const { senderId, message, confirmedBy } = req.body;
@@ -79,24 +64,6 @@ export default async function handler(req, res) {
 
       const uniqueId = uuidv4(); // Generate a unique ID
 
-      // Send notifications to all receivers
-      const tokens = receivers.map(receiver => receiver.fcmToken);
-
-      const messagePayload = {
-        notification: {
-          title: 'New Message',
-          body: message,
-        },
-        data: {
-          senderId: senderId.toString(),
-          message: message,
-        },
-      };
-
-      const response = await admin.messaging().sendToDevice(tokens, messagePayload);
-      console.log('Push notification sent successfully:', response);
-
-      // Save messages to MongoDB
       const messages = await Promise.all(
         receivers.map(async (receiver) => {
           const newMessage = await Message.create({
@@ -104,7 +71,7 @@ export default async function handler(req, res) {
             receiver: receiver._id,
             message,
             confirmedBy: confirmedBy,
-            UniqueId: uniqueId,
+            UniqueId: uniqueId, // Assign the unique ID to each message
           });
           return newMessage;
         })
@@ -121,11 +88,48 @@ export default async function handler(req, res) {
       res.status(500).json({
         success: false,
         message: 'Messages could not be sent.',
-        error: error.message,
+      });
+    }
+  } else if (req.method === 'PUT') {
+    try {
+      const { UniqueId, confirmedBy } = req.body;
+
+      if (!UniqueId) {
+        return res.status(400).json({
+          success: false,
+          message: 'Unique ID is required for confirmation.',
+        });
+      }
+
+      // Update all messages with the given uniqueId
+      const updatedMessage = await Message.updateMany(
+        { UniqueId },
+        { confirmed: true, confirmedBy },
+        { new: true }
+      );
+
+      if (!updatedMessage) {
+        return res.status(404).json({
+          success: false,
+          message: 'Message not found.',
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: 'Message confirmation updated successfully!',
+        data: updatedMessage,
+      });
+
+    } catch (error) {
+      console.error('Error updating message confirmation:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Message confirmation could not be updated.',
       });
     }
   } else {
-    res.setHeader('Allow', ['POST']);
+    res.setHeader('Allow', ['POST', 'PUT']);
     res.status(405).json({
       success: false,
       message: `Method ${req.method} Not Allowed`,
