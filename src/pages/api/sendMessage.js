@@ -1,5 +1,3 @@
-// pages/api/sendMessage.js
-
 import dbConnect from "@/config/dbConnect";
 import Message from "@/models/messages";
 import UsersModel from "@/models/users";
@@ -12,7 +10,13 @@ export default async function handler(req, res) {
     try {
       const { senderId, message, confirmedBy } = req.body;
 
-      // Sender ko find karo
+      if (!senderId || !message || !confirmedBy) {
+        return res.status(400).json({
+          success: false,
+          message: "Sender ID, message, and confirmedBy are required.",
+        });
+      }
+
       const sender = await UsersModel.findById(senderId);
       if (!sender) {
         return res.status(404).json({
@@ -21,13 +25,14 @@ export default async function handler(req, res) {
         });
       }
 
-      const { lat: senderLat, lng: senderLng } = sender.location;
+      const { coordinates } = sender.location;
+      const senderLng = coordinates[0];
+      const senderLat = coordinates[1];
 
-      // 3 km radius ke andar delivery boys ko find karo
       const receivers = await UsersModel.aggregate([
         {
           $geoNear: {
-            near: { type: "Point", coordinates: [senderLng, senderLat] },
+            near: { type: "Point", coordinates: [senderLng, senderLat], },
             distanceField: "dist.calculated",
             maxDistance: 3000, // 3 km
             spherical: true,
@@ -51,8 +56,8 @@ export default async function handler(req, res) {
             sender: senderId,
             receiver: receiver._id,
             message,
-            confirmedBy: confirmedBy,
-            UniqueId: uniqueId,
+            confirmedBy,
+            uniqueId,
           });
           return newMessage;
         })
@@ -72,9 +77,9 @@ export default async function handler(req, res) {
     }
   } else if (req.method === "PUT") {
     try {
-      const { UniqueId, confirmedBy } = req.body;
+      const { uniqueId, confirmedBy } = req.body;
 
-      if (!UniqueId) {
+      if (!uniqueId) {
         return res.status(400).json({
           success: false,
           message: "Unique ID is required for confirmation.",
@@ -82,7 +87,7 @@ export default async function handler(req, res) {
       }
 
       const updatedMessage = await Message.updateMany(
-        { UniqueId },
+        { uniqueId },
         { confirmed: true, confirmedBy },
         { new: true }
       );

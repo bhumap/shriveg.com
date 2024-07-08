@@ -21,10 +21,41 @@ const RegistrationForm = () => {
     },
     fullName: "",
     password: "",
-
+    location: {
+      type: "Point",
+      coordinates: [0, 0], // Default coordinates
+    },
   });
 
+  useEffect(() => {
+    // Function to fetch user's current location
+    const fetchLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            setFormData({
+              ...formData,
+              location: {
+                type: "Point",
+                coordinates: [longitude, latitude],
+              },
+            });
+          },
+          (error) => {
+            console.error("Error getting geolocation:", error);
+            // Handle error here
+          }
+        );
+      } else {
+        console.error("Geolocation is not supported by this browser.");
+        // Handle unsupported case
+      }
+    };
 
+    // Fetch location on component mount
+    fetchLocation();
+  }, []);
 
   const changeHandler = (e) => {
     const name = e.target.name;
@@ -47,11 +78,8 @@ const RegistrationForm = () => {
       e.preventDefault();
       setLoading(true);
       id = toast.loading("Please wait...");
-  
+      const res = await axios.post("/api/auth/register", formData);
 
-  
-      const res = await axios.post("/api/auth/register", formDataToSend);
-  
       if (res.data.success) {
         toast.update(id, {
           render: res.data.message,
@@ -60,7 +88,7 @@ const RegistrationForm = () => {
         });
         refetch();
         router.push("/");
-  
+
         setTimeout(() => {
           toast.dismiss(id);
           setLoading(false);
@@ -209,6 +237,29 @@ const RegistrationForm = () => {
                     disabled={loading}
                   />
                 </div>
+
+                {formData.userType === "Chef" && (
+                  <div>
+                    <label
+                      htmlFor="username"
+                      className="block mb-2 text-sm font-medium text-gray-900"
+                    >
+                      Username
+                    </label>
+
+                    <input
+                      type="text"
+                      name="username"
+                      id="username"
+                      placeholder="Enter Username"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                      required={true}
+                      onChange={changeHandler}
+                      disabled={loading}
+                    />
+                  </div>
+                )}
+
 
                 <div>
                   <label

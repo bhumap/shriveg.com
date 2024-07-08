@@ -31,7 +31,7 @@ export default async function handler(req, res) {
         });
         return
       }
-
+      
     }
 
     if (!bodyData.password) {
@@ -50,6 +50,8 @@ export default async function handler(req, res) {
         });
         return
       }
+
+      
 
       // check for already existed email user
       var alreadyEmailInUsedUser = await UsersModal.findOne({"email.value":bodyData.email?.value})

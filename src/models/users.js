@@ -63,12 +63,12 @@ const userSchema = new mongoose.Schema({
       type: String,
       enum: ["Point"],
       default: "Point",
+      required: true,
     },
     coordinates: {
-      type: [Number]
-
+      type: [Number],
+      required: true,
     },
-  
   },
   isApproved: {
     type: Boolean,
