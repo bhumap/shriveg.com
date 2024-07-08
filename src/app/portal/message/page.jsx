@@ -17,7 +17,7 @@ const SendMessageForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     try {
       const response = await fetch("/api/sendMessage", {
         method: "POST",
@@ -30,16 +30,17 @@ const SendMessageForm = () => {
           confirmedBy,
         }),
       });
-
+  
       if (!response.ok) {
-        throw new Error("Message could not be sent.");
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
+  
       const data = await response.json();
-      alert("Message sent successfully")
+      alert("Message sent successfully");
       console.log("Message sent successfully:", data);
     } catch (error) {
       console.error("Error sending message:", error.message);
+      alert("Failed to send message. Please try again.");
     }
   };
 
