@@ -36,8 +36,8 @@ const ChefOrders = () => {
     }));
 
     setOrder(dishesData);
-    const Ndata = order.map((e)=>{
-      return e.dish
+    const Ndata = order.dish.map((e)=>{
+      return e
     })
 
     console.log(Ndata);
