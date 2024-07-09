@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
   if (req.method === "POST") {
     try {
-      const { senderId, message, confirmedBy, addressId, userId, orderId } =
+      const { senderId, message, confirmedBy, addressId, User_Id, orderId } =
         req.body;
 
       // Find sender
@@ -72,7 +72,7 @@ export default async function handler(req, res) {
             receiver: receiver._id,
             message,
             addressId: addressId,
-            userId: userId,
+            User_Id: User_Id,
             orderId: orderId,
             confirmedBy: confirmedBy,
             UniqueId: uniqueId,
