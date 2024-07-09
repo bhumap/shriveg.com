@@ -10,23 +10,8 @@ const MessageSchema = new mongoose.Schema({
   },
   message: { type: String, required: true },
 
-  dishes: [
-    {
-      dish: {
-        required: true,
-      },
-      quantity: {
-        type: Number,
-        required: true,
-      },
-      price: {
-        type: Number,
-        required: true,
-      },
-    },
-  ],
+  addressId: { type: String, required: true },
 
-  
   read: {
     type: Boolean,
     default: false,
