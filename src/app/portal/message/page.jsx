@@ -8,9 +8,6 @@ const SendMessageForm = () => {
   const [senderId, setSenderId] = useState("");
   const [message, setMessage] = useState("New Order");
   const [confirmedBy, setConfirmedBy] = useState("");
-  const [addressIdby, setAddressId] = useState("");
-  const [orderIdby, setOrderIdby] = useState("");
-  const [user_Idby, setUser_Idby] = useState("");
 
   useEffect(() => {
     if (user && user._id) {
@@ -20,7 +17,7 @@ const SendMessageForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     try {
       const response = await fetch("/api/sendMessage", {
         method: "POST",
@@ -30,13 +27,14 @@ const SendMessageForm = () => {
         body: JSON.stringify({
           senderId,
           message,
-          addressIdby,
-          user_Idby,
-          orderIdby,
           confirmedBy,
         }),
       });
-
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
       const data = await response.json();
       alert("Message sent successfully");
       console.log("Message sent successfully:", data);
