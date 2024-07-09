@@ -9,8 +9,8 @@ const SendMessageForm = () => {
   const [message, setMessage] = useState("New Order");
   const [confirmedBy, setConfirmedBy] = useState("");
   const [address_Id, setAddress_Id] = useState("");
-  const [User_ID, setUser_ID] = useState("");
-  const [Order_Id, setOrder_Id] = useState("");
+  const [user_ID, setUser_ID] = useState("");
+  const [order_Id, setOrder_Id] = useState("");
 
   useEffect(() => {
     if (user && user._id) {
@@ -31,8 +31,8 @@ const SendMessageForm = () => {
           senderId,
           message,
           address_Id,
-          User_ID,
-          Order_Id,
+          user_ID,
+          order_Id,
           confirmedBy,
         }),
       });
