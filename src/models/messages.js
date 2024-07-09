@@ -11,6 +11,10 @@ const MessageSchema = new mongoose.Schema({
   message: { type: String, required: true },
 
   addressId: { type: String, required: true },
+  UserId: { type: String, required: true },
+  category: { type: String, required: true },
+  category: { type: String, required: true },
+  price: { type: String, required: true },
 
   read: {
     type: Boolean,

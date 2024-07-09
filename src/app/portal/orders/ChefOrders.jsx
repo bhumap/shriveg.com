@@ -9,8 +9,7 @@ const ChefOrders = () => {
   var ripple = new Ripple();
 
   var [orders, setOrders] = useState({});
-  const [dish, setDish] = useState({});
-  const [order, setOrder] = useState({});
+
   var [loading, setLoading] = useState(false);
 
   var fetchMyDishes = async () => {
@@ -33,9 +32,7 @@ const ChefOrders = () => {
 
 
   const handlePushClick = (dishData, orderData) => {
-    setDish(dishData);
-    setOrder(orderData);
-    console.log(dish);
+    console.log(dishData);
     console.log(orderData.address._id);
     console.log("UserId"+ ":" + orderData.user._id);
   };
