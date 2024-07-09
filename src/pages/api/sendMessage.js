@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     try {
-      const { senderId, message, confirmedBy } = req.body;
+      const { senderId, message, confirmedBy, addressId, userId, orderId } = req.body;
 
       // Find sender
       const sender = await UsersModel.findById(senderId);
@@ -62,7 +62,7 @@ export default async function handler(req, res) {
         });
       }
 
-      const uniqueId = uuidv4(); // Generate a unique ID
+      const uniqueId = uuidv4(); 
 
       const messages = await Promise.all(
         receivers.map(async (receiver) => {
@@ -70,8 +70,11 @@ export default async function handler(req, res) {
             sender: senderId,
             receiver: receiver._id,
             message,
+            addressId,
+            userId,
+            orderId,
             confirmedBy: confirmedBy,
-            UniqueId: uniqueId, // Assign the unique ID to each message
+            UniqueId: uniqueId, 
           });
           return newMessage;
         })

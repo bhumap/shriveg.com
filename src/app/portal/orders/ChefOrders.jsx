@@ -1,16 +1,20 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Ripple from "material-ripple-effects";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import Image from "next/image";
+import { AuthContext } from "@/context/AuthContext";
 
 const ChefOrders = () => {
   var ripple = new Ripple();
 
+  const { user } = useContext(AuthContext);
   var [orders, setOrders] = useState({});
-
   var [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("New Order");
+  const [confirmedBy, setConfirmedBy] = useState("");
+  const [senderId, setSenderId] = useState("");
 
   var fetchMyDishes = async () => {
     try {
@@ -29,12 +33,33 @@ const ChefOrders = () => {
     fetchMyDishes();
   }, []);
 
+  useEffect(() => {
+    if (user && user._id) {
+      setSenderId(user._id);
+    }
+  }, [user]);
 
 
-  const handlePushClick = (dishData, orderData) => {
-    console.log(dishData);
-    console.log(orderData.address._id);
-    console.log("UserId"+ ":" + orderData.user._id);
+  const handlePushClick = async (dishData, orderData) => {
+    try {
+      console.log(dishData._id);
+      console.log(orderData.address._id);
+      console.log("UserId" + ":" + orderData.user._id);
+
+      const response = await axios.post("/api/sendMessage", {
+        addressId: address._id,
+        userId: orderData.user._id,
+        orderId: dishData._id,
+        message,
+        confirmedBy,
+        senderId
+      });
+      console.log(response.data);
+      alert("Order submitted successfully!");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to submit order.");
+    }
   };
 
   // --------------------
@@ -427,7 +452,6 @@ const ChefOrders = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };
