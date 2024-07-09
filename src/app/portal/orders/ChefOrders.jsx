@@ -37,18 +37,15 @@ const ChefOrders = () => {
  
     setOrder(orderData);
 
-    const dishesData = orderData.dishes.map(detail => ({
-      dish: detail.dish,
-
-    }));
-
-    const NData = dishesData.dish.map(detail2 => ({
-      dish: detail2,
-    }));
-
-    console.log(NData);
 
 
+    const dishesData = orderData.dishes.map(detail => {
+      const { dish } = detail.dish;
+      return {
+        ...dish,};
+    });
+
+    console.log(dishesData);
   };
 
   // const handleSubmit = async () => {
