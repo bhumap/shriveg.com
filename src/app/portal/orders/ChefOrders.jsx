@@ -6,9 +6,6 @@ import { toast } from "react-hot-toast";
 import Image from "next/image";
 
 const ChefOrders = () => {
-
-  
-
   var ripple = new Ripple();
 
   var [orders, setOrders] = useState({});
@@ -33,19 +30,17 @@ const ChefOrders = () => {
     fetchMyDishes();
   }, []);
 
-  const handlePushClick = ( orderData) => {
- 
-    setOrder(orderData);
+  const handlePushClick = (orderData) => {
+    const dishesData = orderData.dishes.map((detail) => ({
+      dish: detail.dish,
+    }));
 
+    setOrder(dishesData);
+    const Ndata = order.map((e)=>{
+      return e.dish
+    })
 
-
-    const dishesData = orderData.dishes.map(detail => {
-      const { dish } = detail.dish;
-      return {
-        ...dish,};
-    });
-
-    console.log(dishesData);
+    console.log(Ndata);
   };
 
   // const handleSubmit = async () => {
