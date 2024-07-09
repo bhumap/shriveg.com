@@ -1,22 +1,29 @@
-import dbConnect from '@/config/dbConnect';
-import Message from '@/models/messages';
-import UsersModel from '@/models/users';
-import { v4 as uuidv4 } from 'uuid';
-import { calculateDistance } from '@/config/distanceCalculator';
+import dbConnect from "@/config/dbConnect";
+import Message from "@/models/messages";
+import UsersModel from "@/models/users";
+import { v4 as uuidv4 } from "uuid";
+import { calculateDistance } from "@/config/distanceCalculator";
 
 export default async function handler(req, res) {
   await dbConnect();
 
-  if (req.method === 'POST') {
+  if (req.method === "POST") {
     try {
-      const { senderId, message, confirmedBy, addressId, user_Id, orderId } = req.body;
+      const {
+        senderId,
+        message,
+        confirmedBy,
+        addressIdby,
+        user_Idby,
+        orderIdby,
+      } = req.body;
 
       // Find sender
       const sender = await UsersModel.findById(senderId);
       if (!sender) {
         return res.status(404).json({
           success: false,
-          message: 'Sender not found.',
+          message: "Sender not found.",
         });
       }
 
@@ -24,23 +31,23 @@ export default async function handler(req, res) {
       if (!coordinates || coordinates.length < 2) {
         return res.status(400).json({
           success: false,
-          message: 'Sender location coordinates are invalid.',
+          message: "Sender location coordinates are invalid.",
         });
       }
 
       const latitude = coordinates[1];
       const longitude = coordinates[0];
 
-      const allReceivers = await UsersModel.find({ userType: 'Delivery_Boy' });
+      const allReceivers = await UsersModel.find({ userType: "Delivery_Boy" });
 
       if (!allReceivers || allReceivers.length === 0) {
         return res.status(404).json({
           success: false,
-          message: 'No delivery boys found.',
+          message: "No delivery boys found.",
         });
       }
 
-      const receivers = allReceivers.filter(receiver => {
+      const receivers = allReceivers.filter((receiver) => {
         const { coordinates: receiverCoordinates } = receiver.location;
         if (!receiverCoordinates || receiverCoordinates.length < 2) {
           console.warn(`Invalid location for receiver: ${receiver._id}`);
@@ -58,7 +65,7 @@ export default async function handler(req, res) {
       if (receivers.length === 0) {
         return res.status(404).json({
           success: false,
-          message: 'No delivery boys within 3km radius.',
+          message: "No delivery boys within 3km radius.",
         });
       }
 
@@ -71,8 +78,8 @@ export default async function handler(req, res) {
             receiver: receiver._id,
             message,
             addressIdby,
-             user_Idby,
-              orderIdby,
+            user_Idby,
+            orderIdby,
             confirmedBy: confirmedBy,
             UniqueId: uniqueId, // Assign the unique ID to each message
           });
@@ -82,25 +89,24 @@ export default async function handler(req, res) {
 
       res.status(201).json({
         success: true,
-        message: 'Messages sent successfully!',
+        message: "Messages sent successfully!",
         data: messages,
       });
-
     } catch (error) {
-      console.error('Error sending messages:', error);
+      console.error("Error sending messages:", error);
       res.status(500).json({
         success: false,
-        message: 'Messages could not be sent.',
+        message: "Messages could not be sent.",
       });
     }
-  } else if (req.method === 'PUT') {
+  } else if (req.method === "PUT") {
     try {
       const { UniqueId, confirmedBy } = req.body;
 
       if (!UniqueId) {
         return res.status(400).json({
           success: false,
-          message: 'Unique ID is required for confirmation.',
+          message: "Unique ID is required for confirmation.",
         });
       }
 
@@ -114,25 +120,24 @@ export default async function handler(req, res) {
       if (!updatedMessage) {
         return res.status(404).json({
           success: false,
-          message: 'Message not found.',
+          message: "Message not found.",
         });
       }
 
       res.status(200).json({
         success: true,
-        message: 'Message confirmation updated successfully!',
+        message: "Message confirmation updated successfully!",
         data: updatedMessage,
       });
-
     } catch (error) {
-      console.error('Error updating message confirmation:', error);
+      console.error("Error updating message confirmation:", error);
       res.status(500).json({
         success: false,
-        message: 'Message confirmation could not be updated.',
+        message: "Message confirmation could not be updated.",
       });
     }
   } else {
-    res.setHeader('Allow', ['POST', 'PUT']);
+    res.setHeader("Allow", ["POST", "PUT"]);
     res.status(405).json({
       success: false,
       message: `Method ${req.method} Not Allowed`,
