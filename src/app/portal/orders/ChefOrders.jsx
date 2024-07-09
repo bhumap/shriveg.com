@@ -42,7 +42,12 @@ const ChefOrders = () => {
 
     }));
 
-    console.log(dishesData);
+    const NData = dishesData.map(detail2 => ({
+      dish: detail2,
+    }));
+
+    console.log(NData);
+
 
   };
 
