@@ -10,7 +10,21 @@ const MessageSchema = new mongoose.Schema({
   },
   message: { type: String, required: true },
 
-  orderDetails: { type: String },
+  dishes: [
+    {
+      dish: {
+        required: true,
+      },
+      quantity: {
+        type: Number,
+        required: true,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
 
   
   read: {

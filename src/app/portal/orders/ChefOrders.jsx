@@ -37,10 +37,33 @@ const ChefOrders = () => {
  
     setOrder(orderData);
 
-    console.log(order.address._id);
-    console.log(order.user._id);
-    console.log(order.dishes);
+    const dishesData = order.dishes.map(detail => ({
+      dish: detail.dish,
+
+    }));
+
+    console.log(dishesData);
+
   };
+
+  // const handleSubmit = async () => {
+  //   try {
+
+  //     const dishesData = order.dishes.map(detail => ({
+  //       dish: detail.dishId,
+  //       quantity: detail.quantity,
+  //       price: detail.price,
+  //     }));
+
+  //     // Send the dishes data to /api/message
+  //     const response = await axios.post('/api/message', { dishes: dishesData });
+  //     console.log(response.data);
+  //     alert('Order submitted successfully!');
+  //   } catch (error) {
+  //     console.error(error);
+  //     alert('Failed to submit order.');
+  //   }
+  // };
 
   // --------------------
   const [showOrderDetail, setShowOrderDetail] = useState(false);
