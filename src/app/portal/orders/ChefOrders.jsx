@@ -6,6 +6,9 @@ import { toast } from "react-hot-toast";
 import Image from "next/image";
 
 const ChefOrders = () => {
+
+  
+
   var ripple = new Ripple();
 
   var [orders, setOrders] = useState({});
@@ -34,7 +37,8 @@ const ChefOrders = () => {
  
     setOrder(orderData);
 
-    console.log(order);
+    console.log(order.address._id);
+    console.log(order.user._id);
   };
 
   // --------------------
