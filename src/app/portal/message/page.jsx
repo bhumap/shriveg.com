@@ -9,8 +9,6 @@ const SendMessageForm = () => {
   const [message, setMessage] = useState("New Order");
   const [confirmedBy, setConfirmedBy] = useState("");
   const [addressId, setAddressId] = useState("");
-  const [User_Id, set_User_Id] = useState("");
-  const [orderId, setOrderId] = useState("");
 
   useEffect(() => {
     if (user && user._id) {
@@ -30,10 +28,8 @@ const SendMessageForm = () => {
         body: JSON.stringify({
           senderId,
           message,
+          addressId,
           confirmedBy,
-          addressId ,
-          User_Id ,
-          orderId ,
         }),
       });
   
