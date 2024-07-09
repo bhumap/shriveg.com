@@ -11,8 +11,6 @@ const MessageSchema = new mongoose.Schema({
   },
   message: { type: String, required: true },
   address_Id: { type: String },
-  user_ID: { type: String },
-  order_Id: { type: String },
   read: { type: Boolean, default: false, required: true },
   confirmed: { type: Boolean, default: false },
   confirmedBy: { type: String },

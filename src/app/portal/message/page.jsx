@@ -31,8 +31,6 @@ const SendMessageForm = () => {
           senderId,
           message,
           address_Id,
-          user_ID,
-          order_Id,
           confirmedBy,
         }),
       });

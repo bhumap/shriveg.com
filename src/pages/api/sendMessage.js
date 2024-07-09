@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     try {
-      const { senderId, message, confirmedBy, address_Id, user_ID, order_Id } = req.body;
+      const { senderId, message, confirmedBy, address_Id } = req.body;
 
       // Find sender
       const sender = await UsersModel.findById(senderId);
@@ -71,8 +71,7 @@ export default async function handler(req, res) {
             receiver: receiver._id,
             message,
             address_Id,
-            user_ID,
-            order_Id,
+   
             confirmedBy: confirmedBy,
             UniqueId: uniqueId, // Assign the unique ID to each message
           });
