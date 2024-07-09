@@ -31,10 +31,6 @@ const SendMessageForm = () => {
         }),
       });
   
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-  
       const data = await response.json();
       alert("Message sent successfully");
       console.log("Message sent successfully:", data);
