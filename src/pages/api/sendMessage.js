@@ -70,9 +70,9 @@ export default async function handler(req, res) {
             sender: senderId,
             receiver: receiver._id,
             message,
-            addressId,
-             user_Id,
-              orderId,
+            addressIdby,
+             user_Idby,
+              orderIdby,
             confirmedBy: confirmedBy,
             UniqueId: uniqueId, // Assign the unique ID to each message
           });
