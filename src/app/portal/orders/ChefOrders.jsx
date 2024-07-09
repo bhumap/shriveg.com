@@ -37,12 +37,12 @@ const ChefOrders = () => {
  
     setOrder(orderData);
 
-    const dishesData = order.dishes.map(detail => ({
-      dish: detail.dish,
+    // const dishesData = order.dishes.map(detail => ({
+    //   dish: detail.dish,
 
-    }));
+    // }));
 
-    console.log(dishesData);
+    console.log(orderData);
 
   };
 
