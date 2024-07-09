@@ -20,7 +20,7 @@ const SendMessageForm = () => {
     event.preventDefault();
   
     try {
-      const response = await fetch("/api/sendMessage", {
+      const response = await fetch("https://www.shriveg.com/api/sendMessage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
