@@ -9,7 +9,7 @@ const ChefOrders = () => {
   var ripple = new Ripple();
 
   var [orders, setOrders] = useState({});
-
+  const [dish, setDish] = useState({});
   const [order, setOrder] = useState({});
   var [loading, setLoading] = useState(false);
 
@@ -30,37 +30,14 @@ const ChefOrders = () => {
     fetchMyDishes();
   }, []);
 
-  const handlePushClick = (orderData) => {
-    const dishesData = orderData.dishes.map((detail) => ({
-      dish: detail.dish,
-    }));
 
-    setOrder(dishesData);
-    const Ndata = order.dish.map((e)=>{
-      return e.dish
-    })
 
-    console.log(Ndata);
+  const handlePushClick = (dishData, orderData) => {
+    setDish(dishData);
+    setOrder(orderData);
+    console.log(dish);
+    console.log(order);
   };
-
-  // const handleSubmit = async () => {
-  //   try {
-
-  //     const dishesData = order.dishes.map(detail => ({
-  //       dish: detail.dishId,
-  //       quantity: detail.quantity,
-  //       price: detail.price,
-  //     }));
-
-  //     // Send the dishes data to /api/message
-  //     const response = await axios.post('/api/message', { dishes: dishesData });
-  //     console.log(response.data);
-  //     alert('Order submitted successfully!');
-  //   } catch (error) {
-  //     console.error(error);
-  //     alert('Failed to submit order.');
-  //   }
-  // };
 
   // --------------------
   const [showOrderDetail, setShowOrderDetail] = useState(false);
@@ -329,6 +306,13 @@ const ChefOrders = () => {
                     </div>
                   </div>
 
+                  <button
+                    className="border py-2 px-4 bg-primary shadow-md text-white rounded-full"
+                    onClick={() => handlePushClick(v.dish, orderDetail)}
+                  >
+                    Push
+                  </button>
+
                   <div className="text-right">
                     <div className="font-semibold text-gray-700 flex items-start">
                       {v?.quantity * v?.price}{" "}
@@ -402,13 +386,6 @@ const ChefOrders = () => {
                           >
                             Accept
                           </button>
-
-                          <button
-                            className="border py-2 px-4 bg-primary shadow-md text-white rounded-full"
-                            onClick={() => handlePushClick(orderDetail)}
-                          >
-                            Push
-                          </button>
                         </React.Fragment>
                       );
                     case "Preparing":
@@ -452,6 +429,7 @@ const ChefOrders = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };
