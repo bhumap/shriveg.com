@@ -39,28 +39,40 @@ const ChefOrders = () => {
     }
   }, [user]);
 
-  const handlePushClick = async (dishData, orderData, message, confirmedBy, senderId) => {
+  const handlePushClick = async (dishData, orderData) => {
     try {
       console.log(dishData._id);
       console.log(orderData.address._id);
       console.log("UserId" + ":" + orderData.user._id);
   
-      const response = await axios.post("/api/sendMessage", {
-        addressId: orderData.address._id,
-        userId: orderData.user._id,
-        orderId: dishData._id,
-        message, // Assuming message is defined somewhere
-        confirmedBy, // Assuming confirmedBy is defined somewhere
-        senderId // Assuming senderId is defined somewhere
+      const response = await fetch("/api/sendMessage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          addressId: orderData.address._id,
+          userId: orderData.user._id,
+          orderId: dishData._id,
+          message,
+          confirmedBy,
+          senderId,
+        }),
       });
   
-      console.log(response.data);
+      if (!response.ok) {
+        throw new Error("Failed to submit order.");
+      }
+  
+      const responseData = await response.json();
+      console.log(responseData);
       alert("Order submitted successfully!");
     } catch (error) {
       console.error(error);
       alert("Failed to submit order.");
     }
   };
+  
   // -------------------- 
   const [showOrderDetail, setShowOrderDetail] = useState(false);
 
