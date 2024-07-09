@@ -8,9 +8,6 @@ const SendMessageForm = () => {
   const [senderId, setSenderId] = useState("");
   const [message, setMessage] = useState("New Order");
   const [confirmedBy, setConfirmedBy] = useState("");
-  const [address_Id, setAddress_Id] = useState("");
-  const [user_ID, setUser_ID] = useState("");
-  const [order_Id, setOrder_Id] = useState("");
 
   useEffect(() => {
     if (user && user._id) {
@@ -30,11 +27,13 @@ const SendMessageForm = () => {
         body: JSON.stringify({
           senderId,
           message,
-          address_Id,
           confirmedBy,
         }),
       });
   
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
   
       const data = await response.json();
       alert("Message sent successfully");
