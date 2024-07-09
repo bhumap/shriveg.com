@@ -9,7 +9,7 @@ const ChefOrders = () => {
   var ripple = new Ripple();
 
   var [orders, setOrders] = useState({});
-  const [dish, setDish] = useState({});
+
   const [order, setOrder] = useState({});
   var [loading, setLoading] = useState(false);
 
@@ -30,12 +30,10 @@ const ChefOrders = () => {
     fetchMyDishes();
   }, []);
 
-
-
-  const handlePushClick = (dishData, orderData) => {
-    setDish(dishData);
+  const handlePushClick = ( orderData) => {
+ 
     setOrder(orderData);
-    console.log(dish);
+
     console.log(order);
   };
 
@@ -306,13 +304,6 @@ const ChefOrders = () => {
                     </div>
                   </div>
 
-                  <button
-                    className="border py-2 px-4 bg-primary shadow-md text-white rounded-full"
-                    onClick={() => handlePushClick(v.dish, orderDetail)}
-                  >
-                    Push
-                  </button>
-
                   <div className="text-right">
                     <div className="font-semibold text-gray-700 flex items-start">
                       {v?.quantity * v?.price}{" "}
@@ -386,6 +377,13 @@ const ChefOrders = () => {
                           >
                             Accept
                           </button>
+
+                          <button
+                            className="border py-2 px-4 bg-primary shadow-md text-white rounded-full"
+                            onClick={() => handlePushClick(orderDetail)}
+                          >
+                            Push
+                          </button>
                         </React.Fragment>
                       );
                     case "Preparing":
@@ -429,7 +427,6 @@ const ChefOrders = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };
