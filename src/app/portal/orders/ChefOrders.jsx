@@ -36,7 +36,7 @@ const ChefOrders = () => {
     setDish(dishData);
     setOrder(orderData);
     console.log(dish);
-    console.log(order);
+    console.log(orderData.address._id);
   };
 
   // --------------------
