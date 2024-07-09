@@ -47,7 +47,7 @@ const ChefOrders = () => {
       console.log("UserId" + ":" + orderData.user._id);
 
       const response = await axios.post("/api/sendMessage", {
-        addressId: address._id,
+        addressId: orderData.address._id,
         userId: orderData.user._id,
         orderId: dishData._id,
         message,
