@@ -5,15 +5,15 @@ import { AuthContext } from "@/context/AuthContext";
 
 const SendMessageForm = () => {
   const { user } = useContext(AuthContext);
-  const [senderId, setSenderId] = useState("");
+  // const [senderId, setSenderId] = useState("65c99d1db12aa6cec598fafb");
   const [message, setMessage] = useState("New Order");
   const [confirmedBy, setConfirmedBy] = useState("");
 
-  useEffect(() => {
-    if (user && user._id) {
-      setSenderId(user._id);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user && user._id) {
+  //     setSenderId(user._id);
+  //   }
+  // }, [user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,7 +25,10 @@ const SendMessageForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          senderId,
+          addressId: "559856",
+          userId: "2982",
+          orderId: "2599",
+          senderId: "65c99d1db12aa6cec598fafb",
           message,
           confirmedBy,
         }),
