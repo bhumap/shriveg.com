@@ -39,6 +39,7 @@ const ChefOrders = () => {
 
     console.log(order.address._id);
     console.log(order.user._id);
+    console.log(order.dishes);
   };
 
   // --------------------
