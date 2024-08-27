@@ -51,6 +51,9 @@ export default function Footer() {
             <li>
               <Link href="/RefundsCancellations">Refunds/Cancellations</Link>
             </li>
+            <li>
+              <Link href="/ShippingDeliveryPolicy">Shipping/Delivery Policy</Link>
+            </li>
           </ul>
 
         </div>
