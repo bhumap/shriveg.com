@@ -160,7 +160,7 @@ const Navbar = () => {
             </Link>
            
             
-            <Link className="block md:inline-block p-2" href="/contact-us">
+            <Link className="block md:inline-block p-2" href="/ContactUs">
               Contact
             </Link>
           </div>

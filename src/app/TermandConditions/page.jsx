@@ -1,175 +1,80 @@
+"use client"
+
 import React from "react";
 import "@/Style/style.css";
-import Link from "next/link";
 
 const Page = () => {
   return (
-    <>
-      <div className="about-banner">
-        <h1 className="about-shrveg">TERMS & CONDITIONS</h1>
-        <div className="about-banner-img about-banner-img2">
-          <p>
-            Welcome to <Link href="https://www.shriveg.com/">shriveg.com</Link>!
-            We are thrilled to have you here and hope you enjoy shopping with
-            us. By accessing or using our website, you agree to comply with and
-            be bound by the following terms and conditions. Please take a few
-            minutes to read them carefully.
-          </p>
+    <div>
+        <section className="bg-gray-50">
+            <div className="flex flex-col items-center justify-center px-20 sm:px-10 md:px-16 lg:px-28 py-8 mx-auto">
+                <article className="text-pretty">
+                    <h3 className="text-xl sm:text-2xl text-center mb-6 sm:mb-10 tracking-wide uppercase">Terms and Conditions</h3>
+                    
+                    <div className="mb-4 sm:mb-6">
+                        <p className="text-sm sm:text-base font-light tracking-wide leading-relaxed">
+                        Thank you for accessing/shopping at <strong>www.shriveg.com</strong>. 
+                        This site is owned by <strong>Shriveg Homemade service Pvt Ltd</strong> (hereinafter referred to as <strong>“www.shriveg.com”</strong>). 
+                        By accessing, shopping on this site, you indicate your unconditional acceptance of these terms & conditions. 
+                        We reserve this right, in our sole discretion, to update or revise these terms & conditions. 
+                        Continued use of the site following the posting of any changes to the ‘terms & conditions’, constitutes your acceptance of those changes. 
+                        At <strong>“www.shriveg.com”</strong>, we try our best to create a space where you can explore and shop for all your favorite things in a safe and secure environment. 
+                        All products and information displayed on <strong>“www.shriveg.com”</strong> constitutes an “invitation to offer”. 
+                        <strong>“www.shriveg.com”</strong> reserves the right to accept or reject your offer. Your order for purchase, constitutes your “offer” which shall be subject to the terms and conditions as listed below.
+                        </p>
+                    </div>
 
-          <h4>1. Acceptance of Terms</h4>
-          <p>
-            By using <Link href="https://www.shriveg.com/">shriveg.com</Link>,
-            you agree to these terms and conditions. We reserve the right to
-            change these terms at any time, and such changes will be effective
-            immediately upon being posted on the site. It&apos;s a good idea to check
-            this page regularly to stay informed about any updates.
-          </p>
+                    <div className="mb-4 sm:mb-6">
+                        <p className="text-lg sm:text-xl mb-2 sm:mb-3 tracking-wide"><u>1. Eligibility to use our site</u></p>
+                        <p className="text-sm sm:text-base font-light tracking-wide leading-relaxed">
+                        Use of the Site is available only to persons who can legally enter into contracts under applicable laws. 
+                        Persons who are “incompetent to contract”, within the meaning of the Indian Contract Act, 1872 including un-discharged insolvents etc. are not eligible to use the Site. 
+                        <strong>“www.shriveg.com”</strong> reserves the right to terminate your access to the Site if it discovers that you are under the age of 18 years or suffers from any other disability, as recognized under Indian Contract Act, 1872.
+                        </p>
+                    </div>
 
-          <h4>2. Eligibility to Use Our Site</h4>
-          <p>
-            To shop with us, you must be at least 18 years old and capable of
-            forming legally binding contracts under applicable law. If you are
-            under 18, you may use our services only with the involvement of a
-            parent or guardian.{" "}
-            <Link href="https://www.shriveg.com/">shriveg.com</Link> reserves
-            the right to terminate your access if it discovers you do not meet
-            these criteria.
-          </p>
+                    <div className="mb-4 sm:mb-6">
+                        <p className="text-lg sm:text-xl mb-2 sm:mb-3 tracking-wide"><u>2. Membership</u></p>
+                        <p className="text-sm sm:text-base font-light tracking-wide leading-relaxed">
+                        Although it&apos;s not essential to have an account to shop with <strong>“www.shriveg.com”</strong>, you can shop as a guest. As a member, you agree to provide true, accurate, current, and complete information about yourself as prompted by the site&apos;s registration form. Registration where prohibited under any law shall be void. <strong>“www.shriveg.com”</strong> reserves the right to revoke or terminate your registration for any reason at any time, without notice.
+                        </p>
+                    </div>
 
-          <h4>3. Your Account</h4>
-          <p>
-            While you can browse{" "}
-            <Link href="https://www.shriveg.com/">shriveg.com</Link> without
-            creating an account, registering with us will make your shopping
-            experience more enjoyable. As a registered user, you&apos;re responsible
-            for keeping your account information secure and up-to-date. Please
-            make sure to use a strong password and protect your account from
-            unauthorized access.
-          </p>
+                    <div className="mb-4 sm:mb-6">
+                        <p className="text-lg sm:text-xl mb-2 sm:mb-3 tracking-wide"><u>3. Electronic Communications</u></p>
+                        <p className="text-sm sm:text-base font-light tracking-wide leading-relaxed">
+                        When you use the site or send emails or other data, information or communicate to us, you agree and understand that you are communicating with us electronically and give your consent to receive communications electronically from us periodically, when required.
+                        </p>
+                    </div>
 
-          <h4>4. Electronic Communications</h4>
-          <p>
-            When you use our site or send emails to us, you are communicating
-            with us electronically. You consent to receive communications from
-            us electronically. We will communicate with you by email or by
-            posting notices on the site. You agree that all agreements, notices,
-            disclosures, and other communications that we provide to you
-            electronically satisfy any legal requirement that such
-            communications be in writing.
-          </p>
-
-          <h4>5. User Reviews and Comments</h4>
-          <p>
-            We love hearing from you! When you submit reviews, comments, or any
-            other content, you&apos;re giving us the right to use it. This means we
-            can use, modify, and share your content in any way we see fit.
-            Remember, your feedback helps us improve and grow.
-          </p>
-
-          <h4>6. Product Information</h4>
-          <p>
-            We strive to provide accurate and up-to-date information about our
-            products. However, we do not guarantee that the product
-            descriptions, images, or other content on our site are entirely
-            accurate, complete, reliable, current, or error-free. If you find a
-            product is not as described, your sole remedy is to return it in
-            unused condition.
-          </p>
-
-          <h4>7. Pricing</h4>
-          <p>
-            All prices listed on our site are subject to change without notice.
-            We make every effort to ensure that the prices are accurate, but
-            errors may occur. If we discover an error in the price of any item
-            you have ordered, we will inform you as soon as possible and give
-            you the option of reconfirming your order at the correct price or
-            canceling it. If we are unable to contact you, we will treat the
-            order as canceled.
-          </p>
-
-          <h4>8. Payment</h4>
-          <p>
-            We accept various forms of payment, including credit/debit cards,
-            net banking, and digital wallets. By submitting an order, you
-            authorize us to charge your selected payment method. We take
-            reasonable care to make our site secure, but in the absence of
-            negligence on our part, we will not be held liable for any loss you
-            may suffer if a third party procures unauthorized access to any data
-            you provide when accessing or ordering from our site.
-          </p>
-
-          <h4>9. Shipping and Delivery</h4>
-          <p>
-            We aim to deliver your orders as quickly as possible. Shipping times
-            may vary based on your location and the availability of products. We
-            are not responsible for delays caused by unforeseen circumstances,
-            such as natural disasters, strikes, or transportation issues. For
-            detailed information on our shipping and delivery policies, please
-            visit our{" "}
-            <Link href="https://www.shriveg.com/shipping-policy">
-              Shipping Policy
-            </Link>{" "}
-            page.
-          </p>
-
-          <h4>10. Returns and Cancellations</h4>
-          <p>
-            If you are not satisfied with your purchase, you can return the
-            product in its original condition within the specified return
-            period. Please refer to our{" "}
-            <Link href="https://www.shriveg.com/return-policy">
-              Return Policy
-            </Link>{" "}
-            for more details. Note that certain products may not be eligible for
-            return due to hygiene or other reasons.
-          </p>
-
-          <h4>11. Use of Platform Services</h4>
-          <p>
-            Our platform offers various services to enhance your shopping
-            experience. This includes personalized recommendations,
-            notifications about offers, and customer support. By using these
-            services, you agree to receive notifications and updates from us. We
-            strive to make these services beneficial for you, but you can opt
-            out of non-essential notifications anytime through your account
-            settings.
-          </p>
-
-          <h4>12. Limitation of Liability</h4>
-          <p>
-            To the fullest extent permitted by law,{" "}
-            <Link href="https://www.shriveg.com/">shriveg.com</Link> shall not
-            be liable for any indirect, incidental, special, or consequential
-            damages arising out of or in connection with the use of our site or
-            the purchase of products from us.
-          </p>
-
-          <h4>13. Governing Law</h4>
-          <p>
-            These terms and conditions are governed by and construed in
-            accordance with the laws of India. Any disputes arising out of or in
-            connection with these terms shall be subject to the exclusive
-            jurisdiction of the courts of [Your City].
-          </p>
-
-          <h4>14. Contact Us</h4>
-          <p>
-            If you have any questions or concerns about these terms and
-            conditions, please feel free to reach out to us at:
-          </p>
-          <div className="contact-us-section">
-            <p>
-              <strong>Shriveg</strong>
-            </p>
-            <p>Company Address</p>
-            <p>000 000 000</p>
-            <p>
-              <a href="mailto:shriveg@gmail.com">shriveg@gmail.com</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </>
+                    <div className="mb-4 sm:mb-6">
+                        <p className="text-lg sm:text-xl mb-2 sm:mb-3 tracking-wide"><u>4. Reviews, Feedback, Submissions</u></p>
+                        <p className="text-sm sm:text-base font-light tracking-wide leading-relaxed">
+                        All reviews, comments, feedback, postcards, suggestions, ideas, and other submissions disclosed, submitted or offered to <strong>“www.shriveg.com”</strong> directly or otherwise disclosed, submitted or offered in connection with your use of this Site (collectively referred to “Comments”) will remain <strong>“www.shriveg.com”</strong> property. Such disclosure, submission or offer of any comments shall constitute an assignment to <strong>“www.shriveg.com”</strong> of all worldwide rights, titles and interests in all copyrights and other intellectual properties in the comments, thus, it exclusively owns all such rights, titles and interests and shall not be limited in any way in its use, commercial or otherwise. 
+                        </p>
+                        <p className="text-sm sm:text-base font-light tracking-wide leading-relaxed">
+                        <strong>“www.shriveg.com”</strong> will be entitled to use, reproduce, disclose, modify, adapt, create derivative works from, publish, display and distribute any comments you submit for any purpose whatsoever, without restriction and without compensating you in any way. <strong>“www.shriveg.com”</strong> is and shall be under no obligation : 
+                        
+                        </p>
+                        <ul>
+                            <li id="1"><strong>(1)</strong> to maintain any Comments in confidence; or </li>
+                            <li id="2"><strong>(2)</strong> to pay you any compensation for any Comments; or </li>
+                            <li id="3"><strong>(3)</strong> to respond to any Comments. You agree that any comments submitted by you to the Site will not violate this policy or any right of any third party, including copyright, trademark, privacy or other personal or proprietary right(s), and will not cause injury to any person or entity. You further agree that no comments submitted by you to the site will be libelous or otherwise unlawful, threatening, abusive or obscene material, or contain software viruses, political campaigning, commercial solicitation, chain letters, mass mailings or any form of “spam”.</li>
+                        </ul>
+                        <p className="text-sm sm:text-base font-light tracking-wide leading-relaxed">
+                        <strong>“www.shriveg.com”</strong> does not regularly review posted comments, but does reserve the right (but not the obligation) to monitor and edit or remove any comment submitted to the Site. You grant <strong>“www.shriveg.com”</strong> the right to use the name that you submit in connection with any of the posted comments. You agree not to use a false email address, impersonate any person or entity, or otherwise mislead as to the origin of any Comments you submit. You are and shall remain solely responsible for the content of any comments you make and you agree to indemnify <strong>“www.shriveg.com”</strong> and its affiliates for all claims resulting from any Comments you submit, we take no responsibility and assume no liability for any comments submitted by you or any third party.
+                        </p>
+                    </div>
+                    <div className="mb-4 sm:mb-6">
+                        <p className="text-lg sm:text-xl mb-2 sm:mb-3 tracking-wide"><u>5. Accuracy of Content/ Information of Products on the Web Site</u></p>
+                        <p className="text-sm sm:text-base font-light tracking-wide leading-relaxed">
+                        While <strong>“www.shriveg.com”</strong> strives to provide accurate product and pricing information, typographical errors may occur. In the event that a product is listed at an incorrect price or with incorrect information due to an error in pricing or product information, <strong>“www.shriveg.com”</strong> shall have the right, on our sole discretion, to modify the price of the products, or information of the products or to refuse or cancel any orders placed for that product, unless the product has already been dispatched. 
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
   );
 };
 

@@ -530,3 +530,7 @@ button:hover {
     padding-top: 20px;
   }
 }
+
+p{
+  text-align: justify;
+}
