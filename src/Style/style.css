@@ -534,3 +534,7 @@ button:hover {
 p{
   text-align: justify;
 }
+
+.bg-baseColor{
+  background-color: rgb(6 89 18 / var(--tw-bg-opacity));
+}
