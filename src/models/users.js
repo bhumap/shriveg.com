@@ -5,9 +5,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  username: {
-    type: String,
-  },
   userType: {
     type: String,
     required: true,
@@ -17,6 +14,7 @@ const userSchema = new mongoose.Schema({
   email: {
     value: {
       type: String,
+      unique: true,
     },
     isVerified: {
       type: Boolean,
@@ -92,6 +90,14 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
     required: true,
+  },
+  referral_code: {
+    type: String,
+    required:true,
+    unique: true
+  },
+  referred_by: {
+    type: String
   },
   deviceTokens: [String],
   wallet: {

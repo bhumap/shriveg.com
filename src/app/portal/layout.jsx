@@ -31,6 +31,10 @@ const Layout = ({ children }) => {
       href: "/portal/profile",
     },
     {
+      label: "Rewards",
+      href: "/portal/rewards",
+    },
+    {
       label: "Settings",
       href: "/portal/profile/edit",
     },

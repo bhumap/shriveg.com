@@ -3,14 +3,15 @@ import { useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AuthContext } from "@/context/AuthContext";
 
 const RegistrationForm = () => {
   var { refetch } = useContext(AuthContext);
-
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const referralCode = searchParams.get("referral");
   const [loading, setLoading] = useState(false);
-  var router = useRouter();
   const [formData, setFormData] = useState({
     userType: "Customer",
     email: {
@@ -21,42 +22,45 @@ const RegistrationForm = () => {
     },
     fullName: "",
     password: "",
+    referral_code: "",
     location: {
       type: "Point",
-      coordinates: [0, 0], // Default coordinates
+      coordinates: [0, 0],
     },
   });
 
   useEffect(() => {
-    // Function to fetch user's current location
+      setFormData((prevData) => ({
+        ...prevData,
+        referral_code: referralCode,
+      }));
+      console.log(referralCode);
+
     const fetchLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const { latitude, longitude } = position.coords;
-            setFormData({
-              ...formData,
+            setFormData((prevData) => ({
+              ...prevData,
               location: {
                 type: "Point",
                 coordinates: [longitude, latitude],
               },
-            });
+            }));
           },
           (error) => {
             console.error("Error getting geolocation:", error);
-            // Handle error here
           }
         );
       } else {
         console.error("Geolocation is not supported by this browser.");
-        // Handle unsupported case
       }
     };
-
-    // Fetch location on component mount
+  
     fetchLocation();
-  }, []);
-
+  }, [referralCode]); 
+  
   const changeHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;

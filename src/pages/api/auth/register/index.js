@@ -1,74 +1,88 @@
 import dbConnect from "@/config/dbConnect";
 import UsersModal from "@/models/users";
+import RewardsModal from "@/models/rewards";
 import bcrypt from "bcrypt";
 import validator from 'validator'
 import { serialize } from "cookie";
 import { GenAccessToken } from "@/helpers/jwt";
+import generateRandomCode from "@/helpers/GenerateRandomCode"; 
+import { StatusCodes } from 'http-status-codes';
+
+async function generateUniqueToken(length=6) {
+  const token = generateRandomCode(length);
+
+  const isAlreadyExist = await UsersModal.findOne({referral_code: token});
+
+  if (isAlreadyExist) {
+    generateRandomCode(length);
+  }
+
+  return token;
+}
+
+async function validateRefralCode(referral_code) {
+  const user = await UsersModal.findOne({referral_code});
+
+  if (!user) return {user: null, invalid: true};
+
+  return {user, invalid: false};
+}
 
 export default async function handler(req, res) {
   await dbConnect();
-
   try {
+    const {userType, referral_code} = req.body;
 
-    var bodyData = req.body
-
-
-    if (bodyData.username) {
-      if (bodyData.username.split(" ").length >= 2) {
-        res.status(400).json({
-          success: false,
-          message: "Spaces are not allowed in Username!",
-        });
-        return
-      }
-      bodyData.username = bodyData.username.toLowerCase()
-
-      var alreadyUsernameInUsedUser = await UsersModal.findOne({username:bodyData.username})
-      if(alreadyUsernameInUsedUser){
-        res.status(409).json({
-          success: false,
-          message: "Username Already in used!",
-        });
-        return
-      }
-      
+    if (String(userType).toLowerCase() == 'admin') {
+      res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: "Invalid request",
+      });
+      return
     }
 
-    if (!bodyData.password) {
-      res.status(400).json({
+    if (!req.body.password) {
+      res.status(StatusCodes.BAD_REQUEST).json({
         success: false,
         message: "Password Required!",
       });
       return
     }
 
-    if(bodyData.email?.value){
-      if(!validator.isEmail(bodyData.email?.value)){
-        res.status(400).json({
-          success: false,
-          message: "Invalid Email Formate!",
-        });
-        return
-      }
-
-      
-
-      // check for already existed email user
-      var alreadyEmailInUsedUser = await UsersModal.findOne({"email.value":bodyData.email?.value})
-      if(alreadyEmailInUsedUser){
-        res.status(409).json({
-          success: false,
-          message: "Email Already in used!",
-        });
-        return
-      }
-
-    }else{
-      delete bodyData.email
+    if(req.body.email){
+        if(!validator.isEmail(req.body.email?.value)){
+          res.status(StatusCodes.BAD_REQUEST).json({
+            success: false,
+            message: "Enter a valid Email Address!",
+          });
+          return
+        }
     }
 
-    bodyData.password = await bcrypt.hash(bodyData.password, 10);
-    var createdUser = await UsersModal.create(bodyData);
+    var userDetails = null;
+    if (referral_code) {
+      const {invalid, user} = await validateRefralCode(referral_code);
+      userDetails = user;
+    }
+
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const new_referral_code = await generateUniqueToken(8);
+
+    const createdUser = await UsersModal.create({
+      ...req.body,
+      referral_code: new_referral_code,
+      referred_by: userDetails ? userDetails.referral_code: '',
+      password: hashedPassword,
+    });
+
+    if (userDetails) {
+      await RewardsModal.create({
+        referred_by: userDetails._id,
+        referred_to: createdUser._id,
+        amount_type: 'percentage',
+        reward_amount: 5
+      })
+    }
 
     // Generating Access Token
     const AccessToken = await GenAccessToken({
@@ -84,15 +98,14 @@ export default async function handler(req, res) {
       })
     );
 
-    res.status(201).json({
+    res.status(StatusCodes.CREATED).json({
       success: true,
       message: "Your are Registered Successfully!",
       data:createdUser
     });
     
   } catch (err) {
-
-
+    console.log("err--------->", err)
     // For duplication Error
     if (err.code === 11000) {
       return res.status(409).json({

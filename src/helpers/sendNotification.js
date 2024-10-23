@@ -20,8 +20,8 @@ export default async function sendNotification(deviceTokens, title, body) {
     tokens: deviceTokens,
     webpush: {
       notification: {
-        icon: 'http://localhost:3000/images/logo.svg',
-        image: 'http://localhost:3000/images/logo.svg',
+        icon: 'https://shriveg.com/images/logo.svg',
+        image: 'https://shriveg.com/images/logo.svg',
         click_action:`${process.env.DOMAIN}/portal/orders`
       },
     },

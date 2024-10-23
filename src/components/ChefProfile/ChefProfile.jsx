@@ -19,7 +19,7 @@ const ChefProfile = ({ chefDetail }) => {
   const fetchPopularFoods = async (lat, lon) => {
     try {
       const res = await fetch(
-        `https://www.shriveg.com/api/dishes?chef=${trimmedUsername}&lat=${lat}&lon=${lon}`,
+        `https://shriveg.com/api/dishes?chef=${trimmedUsername}&lat=${lat}&lon=${lon}`,
         {
           cache: "no-store",
         }
