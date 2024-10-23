@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AuthContext } from "@/context/AuthContext";
 
 const RegistrationForm = () => {
@@ -30,44 +30,37 @@ const RegistrationForm = () => {
   });
 
   useEffect(() => {
-    if (referralCode) {
       setFormData((prevData) => ({
         ...prevData,
         referral_code: referralCode,
       }));
-    }
-  }, [referralCode]);
+      console.log(referralCode);
 
-  useEffect(() => {
-    // Function to fetch user's current location
     const fetchLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const { latitude, longitude } = position.coords;
-            setFormData({
-              ...formData,
+            setFormData((prevData) => ({
+              ...prevData,
               location: {
                 type: "Point",
                 coordinates: [longitude, latitude],
               },
-            });
+            }));
           },
           (error) => {
             console.error("Error getting geolocation:", error);
-            // Handle error here
           }
         );
       } else {
         console.error("Geolocation is not supported by this browser.");
-        // Handle unsupported case
       }
     };
-
-    // Fetch location on component mount
+  
     fetchLocation();
-  }, []);
-
+  }, [referralCode]); 
+  
   const changeHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;

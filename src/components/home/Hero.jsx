@@ -13,7 +13,7 @@ const Hero = () => {
     e.preventDefault();
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/search/search?title=${searchTerm}`
+        `https://shriveg.com/api/search/search?title=${searchTerm}`
       );
       setSearchResults(response.data.data);
     } catch (error) {

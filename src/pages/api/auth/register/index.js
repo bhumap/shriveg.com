@@ -1,5 +1,6 @@
 import dbConnect from "@/config/dbConnect";
 import UsersModal from "@/models/users";
+import RewardsModal from "@/models/rewards";
 import bcrypt from "bcrypt";
 import validator from 'validator'
 import { serialize } from "cookie";
@@ -104,6 +105,7 @@ export default async function handler(req, res) {
     });
     
   } catch (err) {
+    console.log("err--------->", err)
     // For duplication Error
     if (err.code === 11000) {
       return res.status(409).json({
