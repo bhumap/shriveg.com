@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const fetchUser = async () => {
   try {
-    var res = await axios.get("https://www.shriveg.com/api/auth/profile");
+    var res = await axios.get("http://localhost:3000/api/auth/profile");
     return res.data.message;
   } catch (error) {
     return null
@@ -15,7 +15,7 @@ const fetchUser = async () => {
 
 const fetchNotifications = async () => {
   try {
-    var res = await axios.get("https://www.shriveg.com/api/notifications");
+    var res = await axios.get("http://localhost:3000/api/notifications");
     return res.data.message;
   } catch (error) {
     return null
@@ -35,7 +35,7 @@ const Context = ({ children }) => {
 
   const marksAsRead = async (id) =>{
     try {
-      var {data} = await axios.put(`https://www.shriveg.com/api/notifications/${id}`,{read:true})
+      var {data} = await axios.put(`http://localhost:3000/api/notifications/${id}`,{read:true})
       if(data.success){
         notifications.refetch()
       }

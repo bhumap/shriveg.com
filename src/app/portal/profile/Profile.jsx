@@ -43,6 +43,10 @@ const Profile = () => {
           <p>{user?.email?.value}</p>
         </div>
         <div className="flex gap-2 items-center">
+          <i className="bx bxs-envelope"></i>
+          <p>{user?.referral_code}</p>
+        </div>
+        <div className="flex gap-2 items-center">
           <i className="bx bxs-map"></i>
           <p>{`${user?.address?.line1 || ""} ${user?.address?.line2 || ""} ${
             user?.address?.line3 || ""

@@ -7,7 +7,7 @@ import CollectionCard from "@/components/common/CollectionCard";
 const fetchPopularFoods = async (lat, lon) => {
   try {
     const res = await fetch(
-      `https://www.shriveg.com/api/dishes?lat=${lat}&lon=${lon}`,
+      `http://localhost:3000/api/dishes?lat=${lat}&lon=${lon}`,
       {
         cache: "no-store",
       }

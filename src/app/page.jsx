@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 
 const fetchChefs = async () => {
   try {
-    const res = await fetch(`https://www.shriveg.com/api/users?userType=Chef`, {
+    const res = await fetch(`http://localhost:3000/api/users?userType=Chef`, {
       cache: "no-store",
     });
     const data = await res.json();
@@ -27,7 +27,7 @@ const fetchChefs = async () => {
 const fetchPopularFoods = async (lat, lon) => {
   try {
     const res = await fetch(
-      `https://www.shriveg.com/api/dishes?lat=${lat}&lon=${lon}`,
+      `http://localhost:3000/api/dishes?lat=${lat}&lon=${lon}`,
       {
         cache: "no-store",
       }

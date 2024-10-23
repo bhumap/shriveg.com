@@ -28,6 +28,10 @@ const Layout = ({ children }) => {
     },
     {
       label: "Contact Info",
+      href: "/portal/rewards",
+    },
+    {
+      label: "Rewards",
       href: "/portal/profile",
     },
     {

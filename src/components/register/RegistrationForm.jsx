@@ -8,9 +8,10 @@ import { AuthContext } from "@/context/AuthContext";
 
 const RegistrationForm = () => {
   var { refetch } = useContext(AuthContext);
-
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const referralCode = searchParams.get("referral");
   const [loading, setLoading] = useState(false);
-  var router = useRouter();
   const [formData, setFormData] = useState({
     userType: "Customer",
     email: {
@@ -21,11 +22,21 @@ const RegistrationForm = () => {
     },
     fullName: "",
     password: "",
+    referral_code: "",
     location: {
       type: "Point",
-      coordinates: [0, 0], // Default coordinates
+      coordinates: [0, 0],
     },
   });
+
+  useEffect(() => {
+    if (referralCode) {
+      setFormData((prevData) => ({
+        ...prevData,
+        referral_code: referralCode,
+      }));
+    }
+  }, [referralCode]);
 
   useEffect(() => {
     // Function to fetch user's current location
